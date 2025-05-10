@@ -323,6 +323,9 @@ a {
     width: 100%;
   }
 }
+.info-graph-swiper .swiper-nav {
+  padding-right: 0;
+}
 .info-graph-swiper .swiper-wrapper {
   -webkit-box-flex: 1;
   -ms-flex: 1;
