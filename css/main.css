@@ -1732,7 +1732,7 @@ body {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  height: 100vh;
+  min-height: 100vh;
 }
 .hero__content.project-visible .info-graph-swiper {
   display: none;
@@ -1795,6 +1795,7 @@ body {
   -ms-flex: 0 0 auto;
   flex: 0 0 auto; /* Блок не сжимается и не растягивается */
   opacity: 1;
+  min-height: 100vh;
 }
 .hero__info-container {
   display: -webkit-box;
