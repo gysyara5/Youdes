@@ -160,6 +160,23 @@ Swiper.use([Navigation, Pagination]); */
 
 document.addEventListener("DOMContentLoaded", function () {
   var _document$querySelect;
+  function setSwiperNavPosition() {
+    const footer = document.querySelector("footer");
+    const swiperNav = document.querySelector(".swiper-nav");
+
+    // Проверяем, что элементы существуют и экран шире 1025px
+    if (footer && swiperNav && window.innerWidth > 1024) {
+      const footerHeight = footer.offsetHeight;
+      swiperNav.style.bottom = `${footerHeight - 11}px`;
+    } else if (swiperNav) {
+      // Сбрасываем стиль, если экран меньше или равен 1025px
+      swiperNav.style.bottom = "";
+    }
+  }
+
+  // Вызываем при загрузке
+  setSwiperNavPosition();
+
   // Находим все нужные кнопки и блок
   const projectOpenButtons = document.querySelectorAll(".project-open");
   const homeBackButtons = document.querySelectorAll(".home-back");
@@ -195,24 +212,30 @@ document.addEventListener("DOMContentLoaded", function () {
   const swiperInfoGraph = new Swiper(".info-graph-swiper", {
     slidesPerView: 2.4,
     spaceBetween: 30,
-    freeMode: true,
-    // Включаем свободный режим
-    freeModeMomentum: true,
-    // Инерция при отпускании свайпа
-    freeModeMomentumRatio: 1,
-    // Долгий прокрут при инерции
-    freeModeMomentumVelocityRatio: 1,
-    // Скорость инерции
-    speed: 800,
-    // Плавность прокрутки
-
-    // Для плавного перехода к следующему слайду после инерции
+    loop: false,
+    speed: 300,
+    freeMode: {
+      enabled: true,
+      sticky: true
+    },
+    mousewheel: {
+      invert: false
+    },
+    pagination: {
+      el: ".swiper-progressbar",
+      type: "progressbar",
+      clickable: false
+    },
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev"
+    },
     on: {
       slideChangeTransitionEnd: function () {
-        // Привязка слайдера после окончания инерции
         this.slideTo(this.activeIndex, 300);
       }
     },
+    // Оставляем твои breakpoints
     breakpoints: {
       0: {
         spaceBetween: 15,
@@ -233,14 +256,6 @@ document.addEventListener("DOMContentLoaded", function () {
         slidesPerView: 2.272,
         spaceBetween: 30
       }
-    },
-    pagination: {
-      el: ".swiper-progressbar",
-      type: "progressbar"
-    },
-    navigation: {
-      nextEl: ".swiper-button-next",
-      prevEl: ".swiper-button-prev"
     }
   });
   const swiperInfoGraphProject = new Swiper(".info-graph-projects-swiper", {
@@ -248,18 +263,14 @@ document.addEventListener("DOMContentLoaded", function () {
     spaceBetween: 30,
     preloadImages: false,
     updateOnImagesReady: true,
-    freeMode: true,
-    // Включаем свободный режим
-    freeModeMomentum: true,
-    // Инерция при отпускании свайпа
-    freeModeMomentumRatio: 1,
-    // Долгий прокрут при инерции
-    freeModeMomentumVelocityRatio: 1,
-    // Скорость инерции
-    speed: 800,
-    // Плавность прокрутки
-
-    // Для плавного перехода к следующему слайду после инерции
+    speed: 300,
+    freeMode: {
+      enabled: true,
+      sticky: true
+    },
+    mousewheel: {
+      invert: false
+    },
     on: {
       slideChangeTransitionEnd: function () {
         // Привязка слайдера после окончания инерции
@@ -287,7 +298,14 @@ document.addEventListener("DOMContentLoaded", function () {
   const swiperModelGraph = new Swiper(".model-graph-swiper", {
     slidesPerView: 1,
     spaceBetween: 100,
-    speed: 600,
+    speed: 300,
+    freeMode: {
+      enabled: true,
+      sticky: true
+    },
+    mousewheel: {
+      invert: false
+    },
     navigation: {
       nextEl: ".swiper-button-next",
       prevEl: ".swiper-button-prev"
