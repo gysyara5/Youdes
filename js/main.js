@@ -232,20 +232,27 @@ document.addEventListener("DOMContentLoaded", function () {
   var _document$querySelect;
   function setSwiperNavPosition() {
     const footer = document.querySelector("footer");
-    const swiperNav = document.querySelector(".swiper-nav");
+    const swiperNavs = document.querySelectorAll(".swiper-nav"); // Все элементы навигации
 
-    // Проверяем, что элементы существуют и экран шире 1025px
-    if (footer && swiperNav && window.innerWidth > 1024) {
+    // Проверяем, что футер существует и экран шире 1024px
+    if (footer && window.innerWidth > 1024) {
       const footerHeight = footer.offsetHeight;
-      swiperNav.style.marginBottom = `${footerHeight - 11}px`;
-    } else if (swiperNav) {
-      // Сбрасываем стиль, если экран меньше или равен 1025px
-      swiperNav.style.bottom = "";
+
+      // Применяем margin-bottom ко всем элементам навигации
+      swiperNavs.forEach(nav => {
+        nav.style.marginBottom = `${footerHeight - 11}px`;
+      });
+    } else {
+      // Сбрасываем стиль для всех элементов навигации
+      swiperNavs.forEach(nav => {
+        nav.style.marginBottom = "";
+      });
     }
   }
 
-  // Вызываем при загрузке
-  setSwiperNavPosition();
+  // Вызываем при загрузке и ресайзе
+  window.addEventListener("load", setSwiperNavPosition);
+  window.addEventListener("resize", setSwiperNavPosition);
 
   // Находим все нужные кнопки и блок
   const projectOpenButtons = document.querySelectorAll(".project-open");

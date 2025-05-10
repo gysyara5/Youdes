@@ -395,6 +395,29 @@ a {
   height: 14px;
 }
 
+.model-graph-swiper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+.model-graph-swiper .swiper-wrapper {
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
 .model-graph-swiper .swiper-slide {
   background: unset;
   display: -webkit-box;
@@ -434,8 +457,8 @@ a {
   background: #1b1b1b;
   /*  height: clamp(39.125rem, 32.75rem + 7.08vw, 41.25rem); */
   height: clamp(495px, 68.5vmin, 660px);
-  max-width: 480px;
-  width: clamp(300px, 51vmin, 480px) !important;
+  /*   max-width: 480px; */
+  /*   width: clamp(300px, 51vmin, 480px) !important; */
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -448,13 +471,13 @@ a {
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
   -ms-flex-direction: column;
-  flex-direction: column; /* Чтобы контент шел вертикально */
-  overflow: hidden; /* Обрезаем лишнее */
+  flex-direction: column;
+  overflow: hidden;
 }
 .swiper-slide a {
   -webkit-box-flex: 1;
   -ms-flex-positive: 1;
-  flex-grow: 1; /* Растягивается на доступную высоту */
+  flex-grow: 1;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -1639,6 +1662,15 @@ a {
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
+  margin-top: 60px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  height: 100%;
   visibility: hidden;
   position: absolute;
   left: 100%;
@@ -1656,7 +1688,7 @@ a {
   -ms-flex-align: center;
   align-items: center;
   position: static;
-  margin-top: 50px;
+  margin-top: 60px;
   padding-right: 0;
 }
 
