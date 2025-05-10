@@ -332,6 +332,8 @@ a {
   align-items: center;
 }
 .info-graph-swiper .swiper-slide {
+  width: 480px !important;
+  height: 640px;
   overflow: hidden;
 }
 @media (min-width: 1025px) {
@@ -456,12 +458,11 @@ a {
 .swiper-slide {
   background: #1b1b1b;
   /*  height: clamp(39.125rem, 32.75rem + 7.08vw, 41.25rem); */
-  height: clamp(495px, 68.5vmin, 660px);
+  /*  height: clamp(495px, 68.5vmin, 660px); */
   /*   max-width: 480px; */
   /*   width: clamp(300px, 51vmin, 480px) !important; */
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
+  /*  width: 495px !important;
+  height: 660px; */
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
@@ -1676,6 +1677,8 @@ a {
   left: 100%;
 }
 .info-graph-projects-swiper .swiper-slide {
+  width: 480px !important;
+  height: 640px;
   -webkit-transform: translateZ(0);
   transform: translateZ(0); /* или */
   will-change: transform, opacity, width;

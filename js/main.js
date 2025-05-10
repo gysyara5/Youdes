@@ -330,7 +330,7 @@ document.addEventListener("DOMContentLoaded", function () {
         spaceBetween: 20
       },
       1441: {
-        slidesPerView: 2.272,
+        slidesPerView: _popperjs_core__WEBPACK_IMPORTED_MODULE_1__.auto,
         spaceBetween: 30
       }
     }
