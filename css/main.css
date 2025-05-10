@@ -40,6 +40,7 @@ html {
 *::after {
   -webkit-box-sizing: inherit;
   box-sizing: inherit;
+  scrollbar-width: none;
 }
 
 .page {
@@ -1586,6 +1587,8 @@ a {
 }
 
 .info-graph-projects-swiper {
+  margin-right: -80px;
+  padding-right: 80px;
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
@@ -1607,6 +1610,7 @@ a {
   align-items: center;
   position: static;
   margin-top: 50px;
+  padding-right: 0;
 }
 
 @-webkit-keyframes slideOutLeft {
@@ -1624,6 +1628,7 @@ a {
     pointer-events: none;
     padding: 0;
     width: 0%;
+    display: none;
   }
 }
 
@@ -1642,6 +1647,7 @@ a {
     pointer-events: none;
     padding: 0;
     width: 0%;
+    display: none;
   }
 }
 .home-back {
