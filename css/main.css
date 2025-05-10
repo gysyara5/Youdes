@@ -332,8 +332,8 @@ a {
   align-items: center;
 }
 .info-graph-swiper .swiper-slide {
-  width: 480px !important;
-  height: 640px;
+  width: 495px !important;
+  height: 660px;
   overflow: hidden;
 }
 @media (min-width: 1025px) {
@@ -1677,8 +1677,8 @@ a {
   left: 100%;
 }
 .info-graph-projects-swiper .swiper-slide {
-  width: 480px !important;
-  height: 640px;
+  width: 495px !important;
+  height: 660px;
   -webkit-transform: translateZ(0);
   transform: translateZ(0); /* или */
   will-change: transform, opacity, width;
