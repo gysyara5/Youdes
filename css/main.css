@@ -284,6 +284,7 @@ a {
   -webkit-box-flex: 1;
   -ms-flex: 1;
   flex: 1;
+  height: 100%;
 }
 @media (max-width: 576px) {
   .tabs__content {
@@ -304,6 +305,16 @@ a {
 .info-graph-swiper {
   margin-right: -80px;
   padding-right: 80px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
 }
 @media (max-width: 1024px) {
   .info-graph-swiper {
@@ -311,6 +322,14 @@ a {
     padding-right: unset;
     width: 100%;
   }
+}
+.info-graph-swiper .swiper-wrapper {
+  -webkit-box-flex: 1;
+  -ms-flex: 1;
+  flex: 1;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
 }
 .info-graph-swiper .swiper-slide {
   overflow: hidden;
@@ -330,6 +349,7 @@ a {
 }
 
 .info-graph-item-bottom {
+  z-index: 1;
   padding-top: 15px;
   background-color: #101010;
   position: absolute;
@@ -414,6 +434,8 @@ a {
   background: #1b1b1b;
   /*  height: clamp(39.125rem, 32.75rem + 7.08vw, 41.25rem); */
   height: clamp(495px, 68.5vmin, 660px);
+  max-width: 480px;
+  width: clamp(300px, 51vmin, 480px) !important;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -423,6 +445,32 @@ a {
   -webkit-box-pack: center;
   -ms-flex-pack: center;
   justify-content: center;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column; /* Чтобы контент шел вертикально */
+  overflow: hidden; /* Обрезаем лишнее */
+}
+.swiper-slide a {
+  -webkit-box-flex: 1;
+  -ms-flex-positive: 1;
+  flex-grow: 1; /* Растягивается на доступную высоту */
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  overflow: hidden; /* Обрезаем изображение, если выходит за границы */
+}
+.swiper-slide a img {
+  width: 100%;
+  height: 100%;
+  -o-object-fit: contain;
+  object-fit: contain; /* Вписывает целиком без обрезки */
 }
 @media (max-width: 1440px) {
   .swiper-slide {
@@ -455,13 +503,12 @@ a {
   align-items: center;
   position: relative;
   height: 20px;
-  margin-top: 40px;
   gap: 60px;
   overflow: hidden;
   width: 100%;
   bottom: 74px;
-  position: absolute;
   padding-right: 80px;
+  position: static;
 }
 @media (max-width: 1024px) {
   .swiper-nav {
@@ -1972,7 +2019,6 @@ a {
   -webkit-box-pack: justify;
   -ms-flex-pack: justify;
   justify-content: space-between;
-  margin-bottom: clamp(3.125rem, 1.25rem + 2.08vw, 3.75rem);
 }
 @media (max-width: 1440px) {
   .hero__tabs-upper {
