@@ -2104,6 +2104,9 @@ a {
     display: flex;
   }
 }
+.hero__info-container .hero__title {
+  margin-top: -5px;
+}
 @media (max-width: 1024px) {
   .hero__info-container {
     max-width: 596px;
