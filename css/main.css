@@ -1262,7 +1262,7 @@ a {
 .policy-popup ol.main-list > li {
   font-size: 18px;
   counter-increment: main-item;
-  margin-bottom: 40px;
+  margin-bottom: 22px;
 }
 .policy-popup ol.main-list > li:before {
   content: counter(main-item) ". ";
@@ -1352,7 +1352,7 @@ a {
   font-size: 20px;
   line-height: 140%;
   color: #fff;
-  margin-bottom: 35px;
+  margin-bottom: 22px;
   display: block;
 }
 @media (max-width: 1440px) {
@@ -1377,7 +1377,7 @@ a {
   line-height: 28px;
   color: #fff;
   margin: 0;
-  margin-bottom: 35px;
+  margin-bottom: 22px;
   display: block;
 }
 @media (max-width: 1440px) {
@@ -1481,7 +1481,7 @@ a {
 .offer-popup ol.main-list > li {
   font-size: 18px;
   counter-increment: main-item;
-  margin-bottom: 40px;
+  margin-bottom: 22px;
 }
 .offer-popup ol.main-list > li:before {
   content: counter(main-item) ". ";
@@ -1583,7 +1583,7 @@ a {
   line-height: 28px;
   color: #fff;
   margin: 0;
-  margin-bottom: 40px;
+  margin-bottom: 22px;
   display: block;
   line-height: 28px;
 }
@@ -1668,7 +1668,7 @@ a {
 }
 .offer-popup .offer-text {
   margin: 0;
-  margin-bottom: 40px;
+  margin-bottom: 22px;
   display: block;
   line-height: 28px;
 }
