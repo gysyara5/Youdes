@@ -2018,7 +2018,7 @@ a {
   position: absolute;
   top: 30px;
   left: 80px;
-  right: 80px;
+  z-index: 5;
   height: -webkit-fit-content;
   height: -moz-fit-content;
   height: fit-content;
