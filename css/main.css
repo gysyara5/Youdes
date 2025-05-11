@@ -2152,6 +2152,9 @@ a {
     display: flex;
   }
 }
+.hero__model-container .hero__title {
+  margin-top: -5px;
+}
 .hero__model-container .hero__title span {
   /*   letter-spacing: 2px; */
   margin-left: 5px;
