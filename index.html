@@ -397,39 +397,55 @@
 </main>
     </div>
 
-    <div
-      id="telegram-popup"
-      class="popup-container padding-sect"
-      style="display: none"
-    >
-      <img src="./img/logo.svg" alt="Logo Youdes" class="logo popup" />
-      <div class="popup-title">
-        Мы напишем<br />
-        вам в Telegram!
-      </div>
+    <div id="telegram-popup" class="" style="display: none">
+      <div class="fancybox-slide-from-left popup-container popup-out-slide">
+        <a href="./index.html" class="logo popup"
+          ><img src="./img/logo.svg" alt="Logo Youdes"
+        /></a>
+        <form action="">
+          <div class="popup-title">
+            Мы напишем<br />
+            вам в Telegram!
+          </div>
 
-      <div class="input-group">
-        <label for="name">Как Вас зовут?</label>
-        <input type="text" id="name" placeholder="Ваше имя" />
-      </div>
+          <div class="input-group">
+            <label for="name">Как Вас зовут?</label>
+            <input
+              type="text"
+              id="name"
+              placeholder="Ваше имя"
+              class="input-name"
+            />
+          </div>
 
-      <div class="input-group">
-        <label for="telegram">Telegram</label>
-        <input type="text" id="telegram" placeholder="Логин или ссылка" />
-      </div>
+          <div class="input-group">
+            <label for="telegram">Telegram</label>
+            <input
+              type="text"
+              id="telegram"
+              placeholder="Логин или ссылка"
+              class="input-link"
+            />
+          </div>
 
-      <div class="checkbox-group">
-        <div class="checkbox-item">
-          <input type="checkbox" id="privacy" />
-          <span class="checkmark"></span>
-          <label for="privacy">
-            Я даю согласие на обработку моих персональных данных в соответствии
-            с&nbsp;<a href="#">Политикой конфиденциальности</a>
-          </label>
-        </div>
-      </div>
+          <div class="checkbox-group">
+            <div class="checkbox-item">
+              <input type="checkbox" id="privacy" />
+              <span class="checkmark"></span>
+              <label for="privacy">
+                Я даю согласие на обработку моих персональных данных в
+                соответствии с&nbsp;<a href="#policy-popup" data-fancybox
+                  >Политикой конфиденциальности</a
+                >
+              </label>
+            </div>
+          </div>
 
-      <button class="submit-btn btn-reset">Оставить заявку</button>
+          <button type="button" class="submit-btn btn-reset">
+            Оставить заявку
+          </button>
+        </form>
+      </div>
     </div>
     <div
       id="policy-popup"

@@ -230,6 +230,20 @@ Swiper.use([Navigation, Pagination]); */
 
 document.addEventListener("DOMContentLoaded", function () {
   var _document$querySelect;
+  document.querySelector(".input-name").addEventListener("input", function () {
+    if (this.value.length > 15) {
+      this.value = this.value.slice(0, 15);
+      // Можно также показать сообщение пользователю
+      alert("Максимальная длина - 15 символов");
+    }
+  });
+  document.querySelector(".input-link").addEventListener("input", function () {
+    if (this.value.length > 30) {
+      this.value = this.value.slice(0, 15);
+      // Можно также показать сообщение пользователю
+      alert("Максимальная длина - 30 символов");
+    }
+  });
   function setSwiperNavPosition() {
     const footer = document.querySelector("footer");
     const swiperNavs = document.querySelectorAll(".swiper-nav"); // Все элементы навигации
@@ -424,48 +438,52 @@ document.addEventListener("DOMContentLoaded", function () {
   } else {
     console.error("Один из элементов не найден на странице");
   }
-
-  // Инициализация Fancybox
   Fancybox.bind("[data-fancybox]", {
-    // Доп. настройки (опционально)
-    autoFocus: false,
-    Toolbar: {
-      display: {
-        left: [],
-        middle: [],
-        right: ["close"] // Оставляем только кнопку закрытия справа
-      }
-    },
-
-    dragToClose: false
+    animated: false,
+    showClass: false,
+    hideClass: false,
+    backdrop: false,
+    // Убирает затемнение
+    dragToClose: false // Отключает свайп закрытие
   });
 
-  // Обработчик кнопки "Отправить"
   (_document$querySelect = document.querySelector(".submit-btn")) === null || _document$querySelect === void 0 ? void 0 : _document$querySelect.addEventListener("click", function () {
     const name = document.getElementById("name").value;
     const telegram = document.getElementById("telegram").value;
     const privacyChecked = document.getElementById("privacy").checked;
     if (!name || !telegram) {
       alert("Заполните все поля!");
-      return;
-    }
-    if (!privacyChecked) {
-      alert("Подтвердите согласие!");
-      return;
+      return; // ⛔ Прекратить выполнение, не закрывать попап
     }
 
-    // Отправка данных (замените на fetch/axios)
+    if (!privacyChecked) {
+      alert("Подтвердите согласие!");
+      return; // ⛔ Прекратить выполнение, не закрывать попап
+    }
+
+    // ✅ Все проверки пройдены — продолжаем
+
+    // Отправка данных
     console.log("Данные:", {
       name,
       telegram
     });
 
-    // Закрыть попап и очистить форму
-    Fancybox.close();
+    // Очистка формы
     document.getElementById("name").value = "";
     document.getElementById("telegram").value = "";
     document.getElementById("privacy").checked = false;
+    const slideOut = document.querySelector(".popup-out-slide");
+    slideOut.classList.add("fancybox-slide--closing");
+
+    // Закрытие попапа
+    setTimeout(function () {
+      Fancybox.close();
+    }, 1500);
     alert("Спасибо! Мы свяжемся с вами в Telegram.");
+    setTimeout(function () {
+      slideOut.classList.remove("fancybox-slide--closing");
+    }, 1500);
   });
 });
 
