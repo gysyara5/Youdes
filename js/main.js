@@ -414,10 +414,11 @@ document.addEventListener("DOMContentLoaded", function () {
     },
     breakpoints: {
       1024: {
-        slidesPerView: 2
+        slidesPerView: _popperjs_core__WEBPACK_IMPORTED_MODULE_1__.auto,
+        spaceBetween: 20
       },
       1441: {
-        slidesPerView: 3.5,
+        slidesPerView: _popperjs_core__WEBPACK_IMPORTED_MODULE_1__.auto,
         spaceBetween: 30
       }
     },
