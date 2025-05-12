@@ -230,6 +230,50 @@ Swiper.use([Navigation, Pagination]); */
 
 document.addEventListener("DOMContentLoaded", function () {
   var _document$querySelect;
+  // Открытие попапа при клике на кнопки с классом hero__link
+  const openButtons = document.querySelectorAll(".hero__link");
+  const popup = document.getElementById("telegram-popup");
+  const closeButton = document.querySelector(".popup-close-btn");
+  openButtons.forEach(button => {
+    button.addEventListener("click", function (e) {
+      e.preventDefault();
+      openPopup();
+    });
+  });
+  closeButton.addEventListener("click", closePopup);
+
+  // Закрытие при клике вне попапа
+  popup.addEventListener("click", function (e) {
+    if (e.target === popup) {
+      closePopup();
+    }
+  });
+  function openPopup() {
+    popup.classList.add("active");
+  }
+  function closePopup() {
+    popup.classList.remove("active");
+  }
+
+  // Закрытие по ESC
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") {
+      closePopup();
+    }
+  });
+  document.querySelector(".tabs__nav").addEventListener("click", function (e) {
+    if (e.target.classList.contains("tabs__nav-btn")) {
+      // Удаляем класс у всех кнопок
+      const buttonsTabsNav = this.querySelectorAll(".tabs__nav-btn");
+      buttonsTabsNav.forEach(btn => btn.classList.remove("animate"));
+
+      // Добавляем класс нажатой кнопке
+      e.target.classList.add("animate");
+    }
+  });
+  setTimeout(function () {
+    document.body.classList.add("loaded");
+  }, 100);
   document.querySelector(".input-name").addEventListener("input", function () {
     if (this.value.length > 15) {
       this.value = this.value.slice(0, 15);
@@ -439,9 +483,6 @@ document.addEventListener("DOMContentLoaded", function () {
     console.error("Один из элементов не найден на странице");
   }
   Fancybox.bind("[data-fancybox]", {
-    animated: false,
-    showClass: false,
-    hideClass: false,
     backdrop: false,
     // Убирает затемнение
     dragToClose: false // Отключает свайп закрытие
@@ -473,18 +514,18 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("name").value = "";
     document.getElementById("telegram").value = "";
     document.getElementById("privacy").checked = false;
-    const slideOut = document.querySelector(".popup-out-slide");
-    slideOut.classList.add("fancybox-slide--closing");
 
     // Закрытие попапа
-    setTimeout(function () {
-      Fancybox.close();
-    }, 1500);
+    closePopup(); // <-- Добавлено закрытие попапа
+
     alert("Спасибо! Мы свяжемся с вами в Telegram.");
-    setTimeout(function () {
-      slideOut.classList.remove("fancybox-slide--closing");
-    }, 1500);
   });
+
+  // Функция закрытия попапа
+  function closePopup() {
+    const popup = document.getElementById("telegram-popup");
+    popup.classList.remove("active");
+  }
 });
 
 /***/ }),

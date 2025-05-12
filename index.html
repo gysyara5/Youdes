@@ -50,45 +50,54 @@
           /></a>
         </div>
       </header>
-      <div class="hero__info-container">
-        <h2 class="hero__title">
-          ИНФО<br />
-          ГРАФИКА
-        </h2>
-        <p class="hero__desc">
-          Наш дизайн – это баланс минимализма и&nbsp;стиля. Мы создаём
-          инфографику
-          <br />
-          для&nbsp;маркетплейсов, которая наглядно раскрывает сильные стороны
-          товара, акцентируя внимание на его уникальностии выделяя его среди
-          конкурентов.
-          <br />
-          <br />
-          Неважно где произведена ваша продукция, мы создадим визуальный контент
-          на уровне топовых европейских брендов и подчеркнём её преимущества
-          стильной инфографикой!
-        </p>
-        <a href="#telegram-popup" data-fancybox class="hero__link"
-          >Обсудить проект <img src="./img/button-link-icon.svg" alt=""
-        /></a>
+      <div class="hero__info-middle">
+        <div class="hero__info-container">
+          <h2 class="hero__title">
+            ИНФО<br />
+            ГРАФИКА
+          </h2>
+          <p class="hero__desc">
+            Наш дизайн – это баланс минимализма и&nbsp;стиля. Мы создаём
+            инфографику
+            <br />
+            для&nbsp;маркетплейсов, которая наглядно раскрывает сильные стороны
+            товара, акцентируя внимание на его уникальностии выделяя его среди
+            конкурентов.
+            <br />
+            <br />
+            Неважно где произведена ваша продукция, мы создадим визуальный
+            контент на уровне топовых европейских брендов и подчеркнём её
+            преимущества стильной инфографикой!
+          </p>
+          <!--   <a href="#telegram-popup" data-fancybox class="hero__link"
+            >Обсудить проект <img src="./img/button-link-icon.svg" alt=""
+          /></a> -->
+          <button type="button" class="hero__link btn-reset">
+            Обсудить проект <img src="./img/button-link-icon.svg" alt="" />
+          </button>
+        </div>
+        <div class="hero__model-container">
+          <h2 class="hero__title">
+            <span>3D</span>
+            МОДЕЛИ<br />
+            РОВАНИЕ
+          </h2>
+          <p class="hero__desc">
+            Товар, который хочется купить с первого взгляда! Мы создаем
+            фотореалистичные 3D модели товаров с качественными рендерами для
+            маркетплейсов.<br /><br />В отличие от обычных фотографий, рендеры
+            позволяют показать товар в лучшем виде, с&nbsp;максимальной
+            детализацией, идеальными ракурсами и точной цветопередачей!
+          </p>
+          <!--    <a href="#telegram-popup" data-fancybox class="hero__link"
+            >Обсудить проект <span class="line-to-right"><span></span></span
+          ></a> -->
+          <button type="button" class="hero__link btn-reset">
+            Обсудить проект <img src="./img/button-link-icon.svg" alt="" />
+          </button>
+        </div>
       </div>
-      <div class="hero__model-container">
-        <h2 class="hero__title">
-          <span>3D</span>
-          МОДЕЛИ<br />
-          РОВАНИЕ
-        </h2>
-        <p class="hero__desc">
-          Товар, который хочется купить с первого взгляда! Мы создаем
-          фотореалистичные 3D модели товаров с качественными рендерами для
-          маркетплейсов.<br /><br />В отличие от обычных фотографий, рендеры
-          позволяют показать товар в лучшем виде, с&nbsp;максимальной
-          детализацией, идеальными ракурсами и точной цветопередачей!
-        </p>
-        <a href="#telegram-popup" data-fancybox class="hero__link"
-          >Обсудить проект <span class="line-to-right"><span></span></span
-        ></a>
-      </div>
+
       <footer class="footer">
         <div class="footer__content">
           <span class="footer__copy">© Youdes, 2025</span>
@@ -317,7 +326,7 @@
             </div>
           </div>
 
-          <div class="tabs__panel">
+          <div class="tabs__panel second">
             <div class="hero__model-container padding-sect mobile">
               <h2 class="hero__title">
                 3D<br />
@@ -397,7 +406,63 @@
 </main>
     </div>
 
-    <div id="telegram-popup" class="" style="display: none">
+    <div id="telegram-popup" class="telegram-popup">
+      <div class="popup-container">
+        <button class="popup-close-btn">
+          <img src="./img/icon_close.svg" alt="" />
+        </button>
+        <a href="./index.html" class="logo popup">
+          <img src="./img/logo.svg" alt="Logo Youdes" />
+        </a>
+        <form action="">
+          <div class="popup-title">
+            Мы напишем<br />
+            вам в Telegram!
+          </div>
+
+          <div class="input-group">
+            <label for="name">Как Вас зовут?</label>
+            <input
+              type="text"
+              id="name"
+              placeholder="Ваше имя"
+              class="input-name"
+            />
+          </div>
+
+          <div class="input-group">
+            <label for="telegram">Telegram</label>
+            <input
+              type="text"
+              id="telegram"
+              placeholder="Логин или ссылка"
+              class="input-link"
+            />
+          </div>
+
+          <div class="checkbox-group">
+            <div class="checkbox-item">
+              <label for="privacy" class="">
+                <input type="checkbox" id="privacy" />
+                <span class="checkmark"></span>
+                <span
+                  >Я даю согласие на обработку моих персональных данных в
+                  соответствии с&nbsp;<a href="#policy-popup" data-fancybox
+                    >Политикой конфиденциальности</a
+                  ></span
+                >
+              </label>
+            </div>
+          </div>
+
+          <button type="button" class="submit-btn btn-reset">
+            Оставить заявку
+          </button>
+        </form>
+      </div>
+    </div>
+
+    <!--  <div id="telegram-popup" class="" style="display: none">
       <div class="fancybox-slide-from-left popup-container popup-out-slide">
         <a href="./index.html" class="logo popup"
           ><img src="./img/logo.svg" alt="Logo Youdes"
@@ -430,12 +495,14 @@
 
           <div class="checkbox-group">
             <div class="checkbox-item">
-              <input type="checkbox" id="privacy" />
-              <span class="checkmark"></span>
-              <label for="privacy">
-                Я даю согласие на обработку моих персональных данных в
-                соответствии с&nbsp;<a href="#policy-popup" data-fancybox
-                  >Политикой конфиденциальности</a
+              <label for="privacy" class="">
+                <input type="checkbox" id="privacy" />
+                <span class="checkmark"></span>
+                <span
+                  >Я даю согласие на обработку моих персональных данных в
+                  соответствии с&nbsp;<a href="#policy-popup" data-fancybox
+                    >Политикой конфиденциальности</a
+                  ></span
                 >
               </label>
             </div>
@@ -446,7 +513,7 @@
           </button>
         </form>
       </div>
-    </div>
+    </div> -->
     <div
       id="policy-popup"
       class="popup-container policy-popup padding-sect"
