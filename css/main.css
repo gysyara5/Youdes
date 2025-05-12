@@ -449,6 +449,7 @@ a {
   -webkit-box-pack: center;
   -ms-flex-pack: center;
   justify-content: center;
+  height: auto;
 }
 .model-graph-swiper .swiper-nav {
   padding: 0;
