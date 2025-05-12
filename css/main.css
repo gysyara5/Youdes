@@ -238,7 +238,7 @@ a {
 }
 @media (max-width: 1440px) {
   .tabs__nav {
-    gap: 30px;
+    gap: clamp(0.938rem, -1.37rem + 3.61vw, 1.875rem);
   }
 }
 @media (max-width: 1024px) {
@@ -277,7 +277,7 @@ a {
 }
 @media (max-width: 1440px) {
   .tabs__nav-btn {
-    font-size: clamp(0.75rem, 0.442rem + 0.48vw, 0.875rem);
+    font-size: clamp(0.813rem, 0.659rem + 0.24vw, 0.875rem);
   }
 }
 @media (max-width: 1024px) {
@@ -354,6 +354,12 @@ a {
   .info-graph-swiper .swiper-slide {
     width: 375px !important;
     height: 501px;
+  }
+}
+@media (max-height: 760px) {
+  .info-graph-swiper .swiper-slide {
+    width: 314px !important;
+    height: 419px;
   }
 }
 @media (min-width: 1025px) {
@@ -461,6 +467,12 @@ a {
   .model-graph-swiper .swiper-slide img {
     max-width: 600px;
     height: 480px;
+  }
+}
+@media (min-width: 1025px) and (max-height: 700px) {
+  .model-graph-swiper .swiper-slide img {
+    max-width: 498px;
+    height: 440px;
   }
 }
 @media (max-width: 576px) {
@@ -885,6 +897,13 @@ a {
     font-size: 36px;
     line-height: 46px;
     margin-bottom: 55px;
+  }
+}
+@media (min-width: 1025px) and (max-height: 700px) {
+  .popup-title {
+    margin-bottom: 20px;
+    font-size: 31px;
+    line-height: 40px;
   }
 }
 @media (max-width: 1024px) {
@@ -1331,7 +1350,7 @@ a {
 }
 @media (max-width: 1440px) {
   .policy-popup__title {
-    font-size: 37px;
+    font-size: clamp(1.563rem, -0.284rem + 2.88vw, 2.313rem);
     line-height: 127%;
     padding: 50px 66px 50px 80px;
   }
@@ -1575,10 +1594,9 @@ a {
 }
 @media (max-width: 1440px) {
   .offer-popup__title {
-    font-size: 37px;
+    font-size: clamp(1.563rem, 0.639rem + 1.44vw, 1.938rem);
     line-height: 127%;
     padding: 50px 67px 50px 80px;
-    font-size: 45px;
     line-height: 124%;
   }
 }
@@ -1759,6 +1777,12 @@ a {
   .info-graph-projects-swiper .swiper-slide {
     width: 375px !important;
     height: 501px;
+  }
+}
+@media (min-width: 1025px) and (max-height: 700px) {
+  .info-graph-projects-swiper .swiper-slide {
+    width: 314px !important;
+    height: 419px;
   }
 }
 .info-graph-projects-swiper .swiper-wrapper {
@@ -1952,6 +1976,16 @@ a {
 .telegram-popup .popup-container .logo {
   visibility: visible;
   margin-bottom: 80px;
+}
+@media (max-width: 1440px) {
+  .telegram-popup .popup-container .logo {
+    margin-bottom: clamp(1.25rem, -7.981rem + 14.42vw, 5rem);
+  }
+}
+@media (max-height: 700px) {
+  .telegram-popup .popup-container .logo {
+    margin-bottom: 20px;
+  }
 }
 .telegram-popup .popup-container form {
   -webkit-box-flex: 1;
@@ -2423,7 +2457,12 @@ a {
 }
 @media (max-width: 1440px) {
   .hero__info-container {
-    gap: 35px;
+    gap: clamp(0.938rem, -2.139rem + 4.81vw, 2.188rem);
+  }
+}
+@media (max-height: 700px) {
+  .hero__info-container {
+    gap: 10px;
   }
 }
 @media (max-width: 1024px) {
@@ -2448,6 +2487,12 @@ a {
 @media (max-width: 1440px) {
   .hero__info-container .hero__title {
     line-height: 66px;
+  }
+}
+@media (min-width: 1025px) and (max-height: 700px) {
+  .hero__info-container .hero__title {
+    font-size: 52px;
+    line-height: 100%;
   }
 }
 @media (max-width: 1024px) {
@@ -2489,7 +2534,12 @@ a {
 }
 @media (max-width: 1440px) {
   .hero__model-container {
-    gap: 35px;
+    gap: clamp(0.938rem, -2.139rem + 4.81vw, 2.188rem);
+  }
+}
+@media (max-height: 700px) {
+  .hero__model-container {
+    gap: 10px;
   }
 }
 @media (max-width: 1024px) {
@@ -2519,6 +2569,12 @@ a {
   .hero__model-container .hero__title {
     font-size: 66px;
     line-height: 66px;
+  }
+}
+@media (min-width: 1025px) and (max-height: 700px) {
+  .hero__model-container .hero__title {
+    font-size: 52px;
+    line-height: 100%;
   }
 }
 @media (max-width: 1024px) {
@@ -2566,6 +2622,11 @@ a {
   .hero__desc {
     font-size: 16px;
     line-height: 26px;
+  }
+}
+@media (min-width: 1025px) and (max-height: 700px) {
+  .hero__desc {
+    font-size: 14px;
   }
 }
 @media (max-width: 1024px) {
@@ -2787,6 +2848,11 @@ a {
   .footer {
     margin: -30px -75px 0 -80px;
     padding-right: 71px;
+  }
+}
+@media (min-width: 1025px) and (max-height: 700px) {
+  .footer {
+    border: unset;
   }
 }
 @media (max-width: 1024px) {
