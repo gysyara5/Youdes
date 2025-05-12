@@ -350,6 +350,12 @@ a {
     height: 626px;
   }
 }
+@media (max-height: 883px) {
+  .info-graph-swiper .swiper-slide {
+    width: 375px !important;
+    height: 501px;
+  }
+}
 @media (min-width: 1025px) {
   .info-graph-swiper .swiper-slide a {
     pointer-events: none;
@@ -1748,6 +1754,12 @@ a {
     height: 626px;
   }
 }
+@media (max-height: 883px) {
+  .info-graph-projects-swiper .swiper-slide {
+    width: 375px !important;
+    height: 501px;
+  }
+}
 .info-graph-projects-swiper .swiper-wrapper {
   -webkit-box-align: center;
   -ms-flex-align: center;
@@ -1930,6 +1942,11 @@ a {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
+}
+@media (max-width: 1440px) {
+  .telegram-popup .popup-container {
+    max-width: 561px;
+  }
 }
 .telegram-popup .popup-container .logo {
   visibility: visible;
