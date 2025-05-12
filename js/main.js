@@ -384,7 +384,7 @@ document.addEventListener("DOMContentLoaded", function () {
         slidesPerView: 1
       },
       1281: {
-        slidesPerView: 1.8,
+        slidesPerView: _popperjs_core__WEBPACK_IMPORTED_MODULE_1__.auto,
         spaceBetween: 20
       },
       1441: {
@@ -514,11 +514,7 @@ document.addEventListener("DOMContentLoaded", function () {
     document.getElementById("name").value = "";
     document.getElementById("telegram").value = "";
     document.getElementById("privacy").checked = false;
-
-    // Закрытие попапа
     closePopup(); // <-- Добавлено закрытие попапа
-
-    alert("Спасибо! Мы свяжемся с вами в Telegram.");
   });
 
   // Функция закрытия попапа
