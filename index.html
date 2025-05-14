@@ -115,6 +115,9 @@
     <div class="hero__tabs padding-sect">
       <div class="tabs" data-tabs="tab">
         <div class="hero__tabs-upper">
+          <a class="logo home-back tab-swap mobile"
+            ><img src="./img/logo.svg" alt="Logo Youdes "
+          /></a>
           <ul class="tabs__nav">
             <li class="tabs__nav-item">
               <button
@@ -171,7 +174,7 @@
               <div class="swiper info-graph-swiper mobile first">
                 <div class="swiper-wrapper">
                   <div class="swiper-slide">
-                    <a href="./img/photo-model-1.png" data-fancybox="gallery"
+                    <a href="./img/12.jpg" data-fancybox="gallery"
                       ><img src="./img/12.jpg" alt=""
                     /></a>
                     <div class="info-graph-item-bottom">
@@ -184,7 +187,7 @@
                     </div>
                   </div>
                   <div class="swiper-slide">
-                    <a href="./img/photo-model-1.png" data-fancybox="gallery"
+                    <a href="./img/9.jpg" data-fancybox="gallery"
                       ><img src="./img/9.jpg" alt=""
                     /></a>
                     <div class="info-graph-item-bottom">
@@ -197,7 +200,7 @@
                     </div>
                   </div>
                   <div class="swiper-slide">
-                    <a href="./img/photo-model-1.png" data-fancybox="gallery"
+                    <a href="./img/10.jpg" data-fancybox="gallery"
                       ><img src="./img/10.jpg" alt=""
                     /></a>
                     <div class="info-graph-item-bottom">
@@ -210,7 +213,7 @@
                     </div>
                   </div>
                   <div class="swiper-slide">
-                    <a href="./img/photo-model-1.png" data-fancybox="gallery"
+                    <a href="./img/11.jpg" data-fancybox="gallery"
                       ><img src="./img/11.jpg" alt=""
                     /></a>
                     <div class="info-graph-item-bottom">
@@ -289,13 +292,20 @@
               <button class="info-graph-more btn-reset">
                 <span class="all-project">Все проекты</span>
                 <span class="more-close">Свернуть</span>
-                <div class="icon-more">
+
+                <!--   <div class="icon-more">
+
+
                   <div class="icon-more-lines">
                     <div class="icon-more-line"></div>
                   </div>
                   <div class="icon-more-lines">
                     <div class="icon-more-line"></div>
                   </div>
+                </div> -->
+                <div class="icon-burger">
+                  <img src="./img/icon_burger_on.svg" class="on" alt="" />
+                  <img src="./img/icon_burger_off.svg" class="off" alt="" />
                 </div>
               </button>
 
@@ -335,7 +345,7 @@
             <div class="tabs__panel second">
               <div class="hero__model-container padding-sect mobile">
                 <h2 class="hero__title">
-                  3D<br />
+                  <span>3D</span>
                   МОДЕЛИ<br />
                   РОВАНИЕ
                 </h2>
@@ -354,8 +364,17 @@
               <div class="swiper model-graph-swiper">
                 <div class="swiper-wrapper">
                   <div class="swiper-slide">
-                    <a href="./img/photo-model-1.png" data-fancybox="gallery"
+                    <a
+                      class="is-desk"
+                      href="./img/photo-model-1.png"
+                      data-fancybox="gallery"
                       ><img src="./img/photo-model-1.png" alt=""
+                    /></a>
+                    <a
+                      class="is-mobile"
+                      href="./img/model-3d-1.png"
+                      data-fancybox="gallery"
+                      ><img src="./img/model-3d-1.png" alt=""
                     /></a>
                   </div>
                   <div class="swiper-slide">
@@ -394,10 +413,10 @@
   <footer class="footer mobile">
     <div class="footer__content">
       <div class="hero__tabs-upper-links">
-        <a href="#" class="hero__tabs-upper-link"
+        <a href="#" class="hero__tabs-upper-link" class="telegram-icon"
           ><img src="./img/icon_tg.svg" alt="Telegram"
         /></a>
-        <a href="#" class="hero__tabs-upper-link"
+        <a href="#" class="hero__tabs-upper-link" class="be-icon"
           ><img src="./img/icon_be.svg" alt="Be"
         /></a>
       </div>
@@ -423,10 +442,7 @@
           <img src="./img/logo.svg" alt="Logo Youdes" />
         </a>
         <form action="">
-          <div class="popup-title">
-            Мы напишем<br />
-            вам в Telegram!
-          </div>
+          <div class="popup-title">Мы напишем вам&nbsp;в&nbsp;Telegram!</div>
 
           <div class="input-group name">
             <label for="name">Как Вас зовут?</label>
@@ -470,58 +486,6 @@
       </div>
     </div>
 
-    <!--  <div id="telegram-popup" class="" style="display: none">
-      <div class="fancybox-slide-from-left popup-container popup-out-slide">
-        <a href="./index.html" class="logo popup"
-          ><img src="./img/logo.svg" alt="Logo Youdes"
-        /></a>
-        <form action="">
-          <div class="popup-title">
-            Мы напишем<br />
-            вам в Telegram!
-          </div>
-
-          <div class="input-group">
-            <label for="name">Как Вас зовут?</label>
-            <input
-              type="text"
-              id="name"
-              placeholder="Ваше имя"
-              class="input-name"
-            />
-          </div>
-
-          <div class="input-group">
-            <label for="telegram">Telegram</label>
-            <input
-              type="text"
-              id="telegram"
-              placeholder="Логин или ссылка"
-              class="input-link"
-            />
-          </div>
-
-          <div class="checkbox-group">
-            <div class="checkbox-item">
-              <label for="privacy" class="">
-                <input type="checkbox" id="privacy" />
-                <span class="checkmark"></span>
-                <span
-                  >Я даю согласие на обработку моих персональных данных в
-                  соответствии с&nbsp;<a href="#policy-popup" data-fancybox
-                    >Политикой конфиденциальности</a
-                  ></span
-                >
-              </label>
-            </div>
-          </div>
-
-          <button type="button" class="submit-btn btn-reset">
-            Оставить заявку
-          </button>
-        </form>
-      </div>
-    </div> -->
     <div
       id="policy-popup"
       class="popup-container policy-popup padding-sect"
@@ -780,7 +744,7 @@
                 </li>
               </ol>
             </li>
-            <li class="popup-text-bold">
+            <li class="popup-text-bold margin-0">
               Заключительные положения
               <ol class="sub-list">
                 <li class="popup-text-normal">
@@ -1158,7 +1122,7 @@
                   </li>
                 </ol>
               </li>
-              <li class="popup-text-bold">
+              <li class="popup-text-bold margin-0">
                 Реквизиты Исполнителя: <br />
                 <span class="popup-text-normal"
                   >Донченко Константин Сергеевич </span
