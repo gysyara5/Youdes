@@ -2206,34 +2206,64 @@ a {
   transform: translateZ(0);
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
-  will-change: transform;
+  will-change: transform, opacity, width, left;
 }
 
 @-webkit-keyframes slideTo {
   0% {
-    -webkit-transform: translateX(-100%);
-    transform: translateX(-100%);
+    left: 100%;
     opacity: 0;
   }
   100% {
-    -webkit-transform: translateX(0);
-    transform: translateX(0);
+    left: 0;
     opacity: 1;
   }
 }
 
 @keyframes slideTo {
   0% {
-    -webkit-transform: translateX(-100%);
-    transform: translateX(-100%);
+    left: 100%;
     opacity: 0;
   }
   100% {
-    -webkit-transform: translateX(0);
-    transform: translateX(0);
+    left: 0;
     opacity: 1;
   }
 }
+@-webkit-keyframes slideOut {
+  0% {
+    left: 0;
+    opacity: 1;
+  }
+  100% {
+    left: 100%;
+    opacity: 0;
+  }
+}
+@keyframes slideOut {
+  0% {
+    left: 0;
+    opacity: 1;
+  }
+  100% {
+    left: 100%;
+    opacity: 0;
+  }
+}
+.swiper-wrapper {
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  will-change: transform, opacity, width, left;
+}
+
+.swiper-slide {
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  will-change: transform, opacity, width, left;
+}
+
 .header {
   padding-top: 30px;
   /*  margin-bottom: clamp(0.938rem, -14.986rem + 35.26vh, 7.813rem); */
@@ -2404,6 +2434,14 @@ a {
     animation: titleOut 0.4s ease-in forwards;
     pointer-events: none;
   }
+  .hero__content:has(.info-graph-button.animate) .tabs__panel.first .swiper-wrapper {
+    -webkit-animation: slideTo 1s ease-in forwards;
+    animation: slideTo 1s ease-in forwards;
+  }
+  .hero__content:has(.info-graph-button.animate) .tabs__panel.second .swiper-wrapper {
+    -webkit-animation: slideOut 0.5s ease-in forwards;
+    animation: slideOut 0.5s ease-in forwards;
+  }
 }
 @media (min-width: 1025px) {
   .hero__content:has(.model-graph-button.animate) .hero__info-container:not(.mobile) {
@@ -2415,6 +2453,14 @@ a {
     -webkit-animation: titleTo 1s ease-in forwards;
     animation: titleTo 1s ease-in forwards;
     pointer-events: all;
+  }
+  .hero__content:has(.model-graph-button.animate) .tabs__panel.first .swiper-wrapper {
+    -webkit-animation: slideOut 0.5s ease-in forwards;
+    animation: slideOut 0.5s ease-in forwards;
+  }
+  .hero__content:has(.model-graph-button.animate) .tabs__panel.second .swiper-wrapper {
+    -webkit-animation: slideTo 1s ease-in forwards;
+    animation: slideTo 1s ease-in forwards;
   }
 }
 .hero__info-middle {
@@ -2820,6 +2866,15 @@ a {
     padding-left: 75px;
   }
 }
+.hero .tabs__panels {
+  position: absolute;
+  top: 60px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: calc(100% - 60px);
+  min-width: 100%;
+}
 .hero .tabs__content {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -2827,42 +2882,41 @@ a {
 }
 .hero .tabs__content .tabs__panel {
   width: 100%;
+  pointer-events: none;
   top: 0;
+  position: absolute;
   display: -webkit-box !important;
   display: -ms-flexbox !important;
   display: flex !important;
   opacity: 0;
-  -webkit-transform: translateX(100%);
-  -ms-transform: translateX(100%);
-  transform: translateX(100%);
+  /*    transform: translateX(100%); */
+  /*   &.second.tabs__panel--active {
+         transform: translateX(-100%);
+  } */
 }
 .hero .tabs__content .tabs__panel.second {
-  -webkit-transform: translateX(0);
-  -ms-transform: translateX(0);
-  transform: translateX(0);
+  /*     transform: translateX(0); */
 }
 .hero .tabs__content .tabs__panel--active {
+  pointer-events: all;
   display: -webkit-box !important;
   display: -ms-flexbox !important;
   display: flex !important;
   opacity: 1;
   top: 0;
-  -webkit-transform: translateX(0);
-  -ms-transform: translateX(0);
-  transform: translateX(0);
+  /*      transform: translateX(0); */
 }
-.hero .tabs__content .tabs__panel.second.tabs__panel--active {
-  -webkit-transform: translateX(-100%);
-  -ms-transform: translateX(-100%);
-  transform: translateX(-100%);
+.hero .tabs__content .tabs__panel--active.first .swiper-wrapper {
+  /*     animation: slideTo 1s ease-in forwards; */
+}
+.hero .tabs__content .tabs__panel--active.second .swiper-wrapper {
+  /*   animation: slideTo 1s ease-in forwards; */
 }
 
 .loaded .hero .tabs__content .tabs__panel {
-  -webkit-transition: opacity 0.4s ease-in, -webkit-transform 1s ease-in;
-  transition: opacity 0.4s ease-in, -webkit-transform 1s ease-in;
-  -o-transition: transform 1s ease-in, opacity 0.4s ease-in;
-  transition: transform 1s ease-in, opacity 0.4s ease-in;
-  transition: transform 1s ease-in, opacity 0.4s ease-in, -webkit-transform 1s ease-in;
+  -webkit-transition: left 1s, opacity 0.4s ease-in;
+  -o-transition: left 1s, opacity 0.4s ease-in;
+  transition: left 1s, opacity 0.4s ease-in;
 }
 
 .hero__info-container:not(.mobile),

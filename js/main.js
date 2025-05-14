@@ -224,10 +224,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 const tabs = new graph_tabs__WEBPACK_IMPORTED_MODULE_0__["default"]("tab");
-
-/* import Swiper, { Navigation, Pagination } from "swiper";
-Swiper.use([Navigation, Pagination]); */
-
 document.addEventListener("DOMContentLoaded", function () {
   var _document$querySelect;
   // Открытие попапа при клике на кнопки с классом hero__link
@@ -317,6 +313,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const homeBackButtons = document.querySelectorAll(".home-back");
   const tabsNavButtons = document.querySelectorAll(".tabs__nav-btn");
   const heroContent = document.querySelector(".hero__content");
+  const infoGraphButton = document.querySelector(".info-graph-button");
 
   // Обработка кнопок project-open (переключает класс)
   if (projectOpenButtons && heroContent) {
@@ -327,16 +324,36 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // Обработка кнопок home-back (удаляет класс)
+  // Обработка кнопок home-back
   if (homeBackButtons && heroContent) {
     homeBackButtons.forEach(button => {
+      button.addEventListener("click", () => {
+        if (heroContent.classList.contains("project-visible")) {
+          // Если есть класс project-visible
+          heroContent.classList.remove("project-visible");
+
+          // Удаляем класс animate у всех кнопок табов
+          tabsNavButtons.forEach(btn => {
+            btn.classList.remove("animate");
+          });
+        } else if (infoGraphButton) {
+          // Если нет класса project-visible, кликаем по info-graph-button
+          infoGraphButton.click();
+        }
+      });
+    });
+  }
+
+  // Обработка кнопок tabs__nav-btn (удаляет класс project-visible)
+  if (tabsNavButtons && heroContent) {
+    tabsNavButtons.forEach(button => {
       button.addEventListener("click", () => {
         heroContent.classList.remove("project-visible");
       });
     });
   }
 
-  // Обработка кнопок tabs__nav-btn (удаляет класс)
+  // Обработка кнопок tabs__nav-btn (удаляет класс project-visible)
   if (tabsNavButtons && heroContent) {
     tabsNavButtons.forEach(button => {
       button.addEventListener("click", () => {
@@ -347,14 +364,14 @@ document.addEventListener("DOMContentLoaded", function () {
   const swiperInfoGraph = new Swiper(".info-graph-swiper", {
     slidesPerView: _popperjs_core__WEBPACK_IMPORTED_MODULE_1__.auto,
     spaceBetween: 30,
-    preloadImages: true,
-    updateOnImagesReady: true,
+    /*    preloadImages: true,
+    updateOnImagesReady: true, */
     loop: false,
     speed: 300,
-    lazy: {
+    /*   lazy: {
       loadPrevNext: true,
-      loadOnTransitionStart: true
-    },
+      loadOnTransitionStart: true,
+    }, */
     freeMode: {
       enabled: true,
       sticky: true
@@ -422,7 +439,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const swiperInfoGraphProject = new Swiper(".info-graph-projects-swiper", {
     slidesPerView: 3,
     spaceBetween: 30,
-    preloadImages: false,
+    preloadImages: true,
     updateOnImagesReady: true,
     speed: 300,
     preloadImages: true,
