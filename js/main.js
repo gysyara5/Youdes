@@ -347,8 +347,14 @@ document.addEventListener("DOMContentLoaded", function () {
   const swiperInfoGraph = new Swiper(".info-graph-swiper", {
     slidesPerView: _popperjs_core__WEBPACK_IMPORTED_MODULE_1__.auto,
     spaceBetween: 30,
+    preloadImages: true,
+    updateOnImagesReady: true,
     loop: false,
     speed: 300,
+    lazy: {
+      loadPrevNext: true,
+      loadOnTransitionStart: true
+    },
     freeMode: {
       enabled: true,
       sticky: true
@@ -393,12 +399,38 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }
   });
+  const swiperModelGraph = new Swiper(".model-graph-swiper", {
+    slidesPerView: 1,
+    spaceBetween: 100,
+    speed: 300,
+    freeMode: {
+      enabled: true,
+      sticky: true
+    },
+    mousewheel: {
+      invert: false
+    },
+    navigation: {
+      nextEl: ".swiper-button-next",
+      prevEl: ".swiper-button-prev"
+    },
+    pagination: {
+      el: ".swiper-progressbar",
+      type: "progressbar"
+    }
+  });
   const swiperInfoGraphProject = new Swiper(".info-graph-projects-swiper", {
     slidesPerView: 3,
     spaceBetween: 30,
     preloadImages: false,
     updateOnImagesReady: true,
     speed: 300,
+    preloadImages: true,
+    updateOnImagesReady: true,
+    lazy: {
+      loadPrevNext: true,
+      loadOnTransitionStart: true
+    },
     freeMode: {
       enabled: true,
       sticky: true
@@ -431,27 +463,6 @@ document.addEventListener("DOMContentLoaded", function () {
       type: "progressbar"
     }
   });
-  const swiperModelGraph = new Swiper(".model-graph-swiper", {
-    slidesPerView: 1,
-    spaceBetween: 100,
-    speed: 300,
-    freeMode: {
-      enabled: true,
-      sticky: true
-    },
-    mousewheel: {
-      invert: false
-    },
-    navigation: {
-      nextEl: ".swiper-button-next",
-      prevEl: ".swiper-button-prev"
-    },
-    pagination: {
-      el: ".swiper-progressbar",
-      type: "progressbar"
-    }
-  });
-
   // Находим элементы
   const toggleButton = document.querySelector(".info-graph-more");
   const swiperBlock = document.querySelector(".info-graph-swiper");
