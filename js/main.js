@@ -230,6 +230,10 @@ document.addEventListener("DOMContentLoaded", function () {
   const openButtons = document.querySelectorAll(".hero__link");
   const popup = document.getElementById("telegram-popup");
   const closeButton = document.querySelector(".popup-close-btn");
+
+  // Переменные для обработки свайпа
+  let touchStartX = 0;
+  let touchEndX = 0;
   openButtons.forEach(button => {
     button.addEventListener("click", function (e) {
       e.preventDefault();
@@ -255,6 +259,35 @@ document.addEventListener("DOMContentLoaded", function () {
   document.addEventListener("keydown", function (e) {
     if (e.key === "Escape") {
       closePopup();
+    }
+  });
+
+  // Обработка свайпа для мобильных устройств
+  if (window.matchMedia("(max-width: 1023px)").matches) {
+    popup.addEventListener("touchstart", function (e) {
+      touchStartX = e.changedTouches[0].screenX;
+    }, false);
+    popup.addEventListener("touchend", function (e) {
+      touchEndX = e.changedTouches[0].screenX;
+      handleSwipe();
+    }, false);
+  }
+  function handleSwipe() {
+    // Определяем минимальное расстояние свайпа для срабатывания (50px)
+    const minSwipeDistance = 50;
+
+    // Если свайп влево (start > end) и расстояние достаточное
+    if (touchStartX - touchEndX > minSwipeDistance) {
+      closePopup();
+    }
+  }
+
+  // Обработчик изменения размера окна (на случай поворота устройства)
+  window.addEventListener('resize', function () {
+    // Если после изменения размера экран стал больше 1023px, удаляем обработчики свайпа
+    if (!window.matchMedia("(max-width: 1023px)").matches) {
+      popup.removeEventListener("touchstart", function () {});
+      popup.removeEventListener("touchend", function () {});
     }
   });
   document.querySelector(".tabs__nav").addEventListener("click", function (e) {
@@ -514,9 +547,16 @@ document.addEventListener("DOMContentLoaded", function () {
   Fancybox.bind("[data-fancybox]", {
     backdrop: false,
     // Убирает затемнение
-    dragToClose: false // Отключает свайп закрытие
-  });
+    dragToClose: false,
+    // Отключает свайп закрытие  Navigation: false,
 
+    // Отключаем toolbar (кнопки закрытия, полноэкранного режима и т. д.)
+    Toolbar: false,
+    // Отключаем нижний счетчик (например, "1 из 5")
+    Thumbs: {
+      showOnStart: false
+    }
+  });
   (_document$querySelect = document.querySelector(".submit-btn")) === null || _document$querySelect === void 0 ? void 0 : _document$querySelect.addEventListener("click", function () {
     const name = document.getElementById("name").value;
     const telegram = document.getElementById("telegram").value;
