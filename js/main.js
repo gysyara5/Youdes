@@ -546,35 +546,43 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   Fancybox.bind("[data-fancybox]", {
     compact: false,
+    // Отключаем compact режим
     Images: {
       zoom: true,
+      zoomMax: 1,
+      zoomMin: 1,
       panMode: "container"
     },
     Wheel: false,
+    // Отключаем масштабирование колесом мыши
     click: false,
-    dblClick: "zoom",
+    // Отключаем клик по изображению
+    dblClick: false,
+    // Отключаем двойной тап
     dragToClose: false,
     backdrop: false,
     on: {
       done: (fancybox, slide) => {
         if (slide.panzoom) {
           const panzoom = slide.panzoom;
-          const containerWidth = panzoom.container.offsetWidth; // исправлено
-          const imageEl = panzoom.content; // HTMLElement
+
+          // Получаем размеры контейнера и изображения
+          const containerWidth = panzoom.container.offsetWidth;
+          const imageEl = panzoom.content;
           const imageNaturalWidth = imageEl.naturalWidth;
 
-          // Проверка на всякий случай
-          if (containerWidth && imageNaturalWidth) {
-            const desiredZoom = containerWidth / imageNaturalWidth;
+          // Вычисляем желаемый масштаб
+          const desiredZoom = containerWidth / imageNaturalWidth;
 
-            // Устанавливаем одинаковый min и max зум
-            panzoom.options.maxScale = desiredZoom;
-            panzoom.options.minScale = 1;
-            panzoom.reset();
+          // Устанавливаем минимальный и максимальный масштаб
+          panzoom.options.maxScale = desiredZoom;
+          panzoom.options.minScale = 1;
 
-            // Отключаем pinch
-            imageEl.style.touchAction = "none";
-          }
+          // Сбрасываем текущее приближение
+          panzoom.reset();
+
+          // Отключаем жест pinch
+          imageEl.style.touchAction = "none";
         }
       }
     }
