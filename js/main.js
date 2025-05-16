@@ -399,7 +399,6 @@ document.addEventListener("DOMContentLoaded", function () {
     spaceBetween: 30,
     slideToClickedSlide: false,
     watchSlidesProgress: true,
-    // можно также попробовать:
     allowTouchMove: true,
     loop: false,
     speed: 300,
