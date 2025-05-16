@@ -610,6 +610,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     touch: false,
     // Полностью отключает жесты
+    click: false,
     buttons: [],
     toolbar: false,
     arrows: false,
