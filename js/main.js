@@ -545,58 +545,50 @@ document.addEventListener("DOMContentLoaded", function () {
     console.error("Один из элементов не найден на странице");
   }
   Fancybox.bind("[data-fancybox]", {
-    compact: false,
     Images: {
-      zoom: true,
-      zoomMax: 1,
-      zoomMin: 1,
-      panMode: "container"
+      zoom: false // отключаем встроенный зум
     },
-    Wheel: false,
+
     click: false,
+    // отключаем клик
     dblClick: false,
+    // отключаем двойной клик
     dragToClose: false,
     backdrop: false,
     on: {
       done: (fancybox, slide) => {
-        if (slide.panzoom) {
-          const panzoom = slide.panzoom;
-          const containerWidth = panzoom.container.offsetWidth;
-          const imageEl = panzoom.content;
-          const imageNaturalWidth = imageEl.naturalWidth;
-          if (!containerWidth || !imageNaturalWidth) return;
-          const desiredZoom = containerWidth / imageNaturalWidth;
-          panzoom.options.maxScale = desiredZoom;
-          panzoom.options.minScale = 1;
-          panzoom.reset();
-          imageEl.style.touchAction = "manipulation";
-
-          // 🔁 Двойной тап реализация
-          let lastTapTime = 0;
-          imageEl.addEventListener("touchend", e => {
-            const currentTime = new Date().getTime();
-            const tapInterval = currentTime - lastTapTime;
-            if (tapInterval < 300 && tapInterval > 0) {
-              // Это двойной тап
-              e.preventDefault();
-              const currentScale = panzoom.scale;
-              if (Math.abs(currentScale - 1) < 0.01) {
-                // Зум вперёд
-                panzoom.zoomTo(panzoom.center.x, panzoom.center.y, desiredZoom);
-              } else {
-                // Зум назад
-                panzoom.zoomTo(panzoom.center.x, panzoom.center.y, 1);
-              }
+        if (!slide.panzoom) return;
+        const panzoom = slide.panzoom;
+        const containerWidth = panzoom.container.offsetWidth;
+        const imageEl = panzoom.content;
+        const imageNaturalWidth = imageEl.naturalWidth;
+        if (!containerWidth || !imageNaturalWidth) return;
+        const desiredZoom = containerWidth / imageNaturalWidth;
+        panzoom.options.maxScale = desiredZoom;
+        panzoom.options.minScale = 1;
+        panzoom.reset();
+        imageEl.style.touchAction = "manipulation";
+        let lastTapTime = 0;
+        imageEl.addEventListener("touchend", e => {
+          const currentTime = new Date().getTime();
+          const tapGap = currentTime - lastTapTime;
+          if (tapGap > 0 && tapGap < 300) {
+            // Двойной тап
+            e.preventDefault();
+            const currentScale = panzoom.scale;
+            if (Math.abs(currentScale - 1) < 0.01) {
+              panzoom.zoomTo(panzoom.center.x, panzoom.center.y, desiredZoom);
+            } else {
+              panzoom.zoomTo(panzoom.center.x, panzoom.center.y, 1);
             }
-            lastTapTime = currentTime;
-          }, {
-            passive: false
-          }); // <— важно, чтобы e.preventDefault() сработал
-        }
+          }
+          lastTapTime = currentTime;
+        }, {
+          passive: false
+        });
       }
     }
   });
-
   (_document$querySelect = document.querySelector(".submit-btn")) === null || _document$querySelect === void 0 ? void 0 : _document$querySelect.addEventListener("click", function () {
     const name = document.getElementById("name").value;
     const telegram = document.getElementById("telegram").value;
