@@ -604,7 +604,15 @@ document.addEventListener("DOMContentLoaded", function () {
     dragToClose: false,
     groupAttr: "",
     groupAll: false,
-    keyboard: false
+    keyboard: false,
+    defaultType: "image",
+    // явно указываем тип
+    animated: false,
+    // ❗️ Важно — отключаем управление history
+    l10n: {},
+    closeButton: "inside",
+    backdropClick: "close",
+    trapFocus: false
   });
 
   /*   $("[data-fancybox]").fancybox({
