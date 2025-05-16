@@ -611,6 +611,10 @@ document.addEventListener("DOMContentLoaded", function () {
     touch: false,
     // Полностью отключает жесты
     click: false,
+    wheel: "zoom",
+    // Включает зум колесиком/жестами
+    dblclick: "close",
+    // Оставляет закрытие по двойному клику
     backdrop: false,
     // Отключаем стандартный оверлей
     buttons: [],
