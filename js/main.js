@@ -604,19 +604,12 @@ document.addEventListener("DOMContentLoaded", function () {
   $("[data-fancybox]").fancybox({
     touch: {
       vertical: false,
-      // Отключает вертикальное перетаскивание
-      momentum: false // Отключает инерцию при перетаскивании
+      momentum: false
     },
-
-    touch: false,
-    // Полностью отключает жесты
     click: false,
     wheel: "zoom",
-    // Включает зум колесиком/жестами
     dblclick: "close",
-    // Оставляет закрытие по двойному клику
     backdrop: false,
-    // Отключаем стандартный оверлей
     buttons: [],
     toolbar: false,
     arrows: false,
