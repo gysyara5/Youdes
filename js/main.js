@@ -601,9 +601,12 @@ document.addEventListener("DOMContentLoaded", function () {
   Fancybox.bind("[data-fancybox]", {
     contentClick: false,
     contentDblClick: "toggleZoom",
-    dragToClose: false
+    dragToClose: false,
+    groupAttr: "",
+    groupAll: false,
+    keyboard: false
   });
-  console.log(Fancybox);
+
   /*   $("[data-fancybox]").fancybox({
     touch: {
       vertical: false,
