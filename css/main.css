@@ -2578,14 +2578,6 @@ a {
   background: transparent;
 }
 
-/* .fancybox__image {
-  width: 100% !important;
-  height: auto !important;
-  max-width: 100% !important;
-  max-height: none !important;
-  object-fit: contain !important;
-  transform: none !important;
-} */
 .fancybox-slide {
   padding: 0;
 }
@@ -2598,17 +2590,6 @@ a {
   padding: 36px 30px;
 }
 
-/* .my-close-btn {
-  position: absolute;
-  top: 20px;
-  right: 20px;
-  background: transparent;
-  color: #fff;
-  border: none;
-  font-size: 20px;
-  cursor: pointer;
-  z-index: 9999;
-} */
 .is-close-btn {
   padding: 0;
   border: none;

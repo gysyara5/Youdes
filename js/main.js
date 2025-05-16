@@ -598,10 +598,16 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }, 50);
   });
-  $("[data-fancybox]").fancybox({
+  Fancybox.bind("[data-fancybox]", {
+    contentClick: false,
+    contentDblClick: "toggleZoom",
+    dragToClose: false
+  });
+  console.log(Fancybox);
+  /*   $("[data-fancybox]").fancybox({
     touch: {
       vertical: false,
-      momentum: false
+      momentum: false,
     },
     click: false,
     wheel: "zoom",
@@ -615,12 +621,11 @@ document.addEventListener("DOMContentLoaded", function () {
       $(".is-close-btn").on("click", function () {
         $.fancybox.close();
       });
-
-      // ❌ Отключаем перетаскивание
+       // ❌ Отключаем перетаскивание
       instance.$refs.stage.off("touchstart.fb");
       instance.$refs.container.off("touchstart.fb");
-    }
-  });
+    },
+  }); */
 });
 
 /***/ }),
