@@ -602,10 +602,6 @@ document.addEventListener("DOMContentLoaded", function () {
     }, 50);
   });
   $("[data-fancybox]").fancybox({
-    touch: {
-      vertical: false,
-      momentum: false
-    },
     click: false,
     wheel: "zoom",
     dblclick: "close",
