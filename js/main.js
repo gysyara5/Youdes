@@ -601,11 +601,24 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }, 50);
   });
-  $('[data-fancybox="images"]').fancybox({
+  $("[data-fancybox]").fancybox({
+    touch: {
+      vertical: false,
+      // Отключает вертикальное перетаскивание
+      momentum: false // Отключает инерцию при перетаскивании
+    },
+
+    touch: false,
+    // Полностью отключает жесты
     buttons: [],
+    toolbar: false,
     arrows: false,
     infobar: false,
-    toolbar: false
+    afterShow: function (instance, current) {
+      $(".is-close-btn").on("click", function () {
+        $.fancybox.close();
+      });
+    }
   });
 });
 
