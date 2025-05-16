@@ -545,35 +545,26 @@ document.addEventListener("DOMContentLoaded", function () {
     console.error("Один из элементов не найден на странице");
   }
   Fancybox.bind("[data-fancybox]", {
-    backdrop: false,
-    dragToClose: false,
-    Toolbar: {
-      persist: false
-    },
+    compact: false,
+    // Отключаем компактный режим на мобильных устройствах
     Images: {
       zoom: true,
       zoomMax: 1,
       zoomMin: 1,
       panMode: "container"
     },
-    // Отключаем действия по клику и двойному тапу
+    Toolbar: {
+      persist: false
+    },
+    Thumbs: {
+      showOnStart: false
+    },
     click: false,
     dblClick: false,
-    Wheel: false,
-    // Переопределяем поведение при готовности слайда
-    on: {
-      'initSlide': (fancybox, slide) => {
-        // Убираем встроенный зум при двойном тапе
-        if (slide.panzoom) {
-          slide.panzoom.setZoom(1, {
-            friction: 0
-          });
-          slide.panzoom.options.maxScale = 1;
-          slide.panzoom.options.minScale = 1;
-        }
-      }
-    }
+    // Отключаем двойной тап
+    Wheel: false // Отключаем масштабирование колесом мыши
   });
+
   (_document$querySelect = document.querySelector(".submit-btn")) === null || _document$querySelect === void 0 ? void 0 : _document$querySelect.addEventListener("click", function () {
     const name = document.getElementById("name").value;
     const telegram = document.getElementById("telegram").value;
