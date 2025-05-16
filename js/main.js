@@ -545,48 +545,47 @@ document.addEventListener("DOMContentLoaded", function () {
     console.error("Один из элементов не найден на странице");
   }
   Fancybox.bind("[data-fancybox]", {
-    Images: {
-      zoom: false
-    },
-    click: false,
-    dblClick: false,
-    dragToClose: false,
-    backdrop: false,
-    on: {
-      done: (fancybox, slide) => {
-        if (!slide.panzoom) return;
-        const panzoom = slide.panzoom;
-        const containerWidth = panzoom.container.offsetWidth;
-        const containerHeight = panzoom.container.offsetHeight;
-        const imageEl = panzoom.content;
-        const imageNaturalWidth = imageEl.naturalWidth;
-        if (!containerWidth || !imageNaturalWidth) return;
-        const desiredZoom = containerWidth / imageNaturalWidth;
-        panzoom.options.maxScale = desiredZoom;
-        panzoom.options.minScale = 1;
-        panzoom.reset();
-        imageEl.style.touchAction = "manipulation";
-        imageEl.lastTapTime = 0;
-        imageEl.addEventListener("touchend", e => {
-          const currentTime = Date.now();
-          const tapGap = currentTime - (imageEl.lastTapTime || 0);
-          if (tapGap > 0 && tapGap < 300) {
-            var _panzoom$center, _panzoom$center2;
-            e.preventDefault();
-            const centerX = ((_panzoom$center = panzoom.center) === null || _panzoom$center === void 0 ? void 0 : _panzoom$center.x) ?? containerWidth / 2;
-            const centerY = ((_panzoom$center2 = panzoom.center) === null || _panzoom$center2 === void 0 ? void 0 : _panzoom$center2.y) ?? containerHeight / 2;
-            const isZoomedIn = panzoom.scale > 1.01;
-            if (isZoomedIn) {
-              panzoom.zoomTo(centerX, centerY, 1);
-            } else {
-              panzoom.zoomTo(centerX, centerY, desiredZoom);
-            }
-          }
-          imageEl.lastTapTime = currentTime;
-        }, {
-          passive: false
+    contentClick: false,
+    contentDblClick: () => {
+      var _instance$viewport;
+      const instance = Fancybox.getInstance();
+      if (!instance) return;
+      const slide = instance.getSlide();
+      if (!slide || !slide.$content) return;
+      const img = slide.$content.querySelector("img");
+      if (!img) return;
+
+      // Текущий масштаб изображения
+      const currentScale = slide.scale || 1;
+
+      // Ширина viewport Fancybox или fallback на window.innerWidth
+      const viewportWidth = ((_instance$viewport = instance.viewport) === null || _instance$viewport === void 0 ? void 0 : _instance$viewport.width) || window.innerWidth;
+
+      // Ширина отображаемого изображения
+      const displayWidth = img.offsetWidth;
+
+      // Натуральная ширина изображения (оригинальный размер)
+      const naturalWidth = img.naturalWidth;
+      if (currentScale > 1) {
+        // Если сейчас увеличено — сбрасываем к fit (масштаб 1)
+        instance.scaleTo(1, {
+          friction: 0.3
+        });
+      } else {
+        // Вычисляем масштаб для зума ровно до ширины экрана
+        const scaleToWidth = viewportWidth / displayWidth;
+
+        // Не зумим больше оригинального размера
+        const maxScale = naturalWidth / displayWidth;
+        const targetScale = Math.min(scaleToWidth, maxScale);
+        instance.scaleTo(targetScale, {
+          friction: 0.3,
+          pan: false
         });
       }
+    },
+    Images: {
+      initialSize: "fit"
     }
   });
   (_document$querySelect = document.querySelector(".submit-btn")) === null || _document$querySelect === void 0 ? void 0 : _document$querySelect.addEventListener("click", function () {

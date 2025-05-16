@@ -2526,18 +2526,14 @@ a {
   background: transparent;
 }
 
-.fancybox__image {
+/* .fancybox__image {
   width: 100% !important;
   height: auto !important;
   max-width: 100% !important;
   max-height: none !important;
-  -o-object-fit: contain !important;
   object-fit: contain !important;
-  -webkit-transform: none !important;
-  -ms-transform: none !important;
   transform: none !important;
-}
-
+} */
 .header {
   padding-top: 30px;
   /*  margin-bottom: clamp(0.938rem, -14.986rem + 35.26vh, 7.813rem); */
