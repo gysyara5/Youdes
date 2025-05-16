@@ -546,43 +546,55 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   Fancybox.bind("[data-fancybox]", {
     compact: false,
-    // Отключаем compact режим
     Images: {
       zoom: true,
       zoomMax: 1,
+      // Эти значения будут переопределены вручную ниже
       zoomMin: 1,
       panMode: "container"
     },
     Wheel: false,
-    // Отключаем масштабирование колесом мыши
     click: false,
-    // Отключаем клик по изображению
     dblClick: false,
-    // Отключаем двойной тап
+    // Отключим встроенное поведение
     dragToClose: false,
     backdrop: false,
     on: {
       done: (fancybox, slide) => {
         if (slide.panzoom) {
           const panzoom = slide.panzoom;
-
-          // Получаем размеры контейнера и изображения
           const containerWidth = panzoom.container.offsetWidth;
           const imageEl = panzoom.content;
           const imageNaturalWidth = imageEl.naturalWidth;
+          if (containerWidth && imageNaturalWidth) {
+            const desiredZoom = containerWidth / imageNaturalWidth;
+            panzoom.options.maxScale = desiredZoom;
+            panzoom.options.minScale = 1;
+            panzoom.reset();
 
-          // Вычисляем желаемый масштаб
-          const desiredZoom = containerWidth / imageNaturalWidth;
+            // Отключаем pinch
+            imageEl.style.touchAction = "manipulation";
 
-          // Устанавливаем минимальный и максимальный масштаб
-          panzoom.options.maxScale = desiredZoom;
-          panzoom.options.minScale = 1;
-
-          // Сбрасываем текущее приближение
-          panzoom.reset();
-
-          // Отключаем жест pinch
-          imageEl.style.touchAction = "none";
+            // ✅ Добавим поведение двойного тапа
+            let lastTap = 0;
+            imageEl.addEventListener("touchend", e => {
+              const currentTime = new Date().getTime();
+              const tapLength = currentTime - lastTap;
+              if (tapLength < 300 && tapLength > 0) {
+                // двойной тап
+                e.preventDefault();
+                const currentScale = panzoom.scale;
+                if (Math.abs(currentScale - 1) < 0.01) {
+                  // зум вперёд
+                  panzoom.zoomTo(panzoom.center.x, panzoom.center.y, desiredZoom);
+                } else {
+                  // зум назад
+                  panzoom.zoomTo(panzoom.center.x, panzoom.center.y, 1);
+                }
+              }
+              lastTap = currentTime;
+            });
+          }
         }
       }
     }
