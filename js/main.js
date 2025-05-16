@@ -546,48 +546,12 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   Fancybox.bind("[data-fancybox]", {
     contentClick: false,
-    contentDblClick: () => {
-      var _instance$viewport;
-      const instance = Fancybox.getInstance();
-      if (!instance) return;
-      const slide = instance.getSlide();
-      if (!slide || !slide.$content) return;
-      const img = slide.$content.querySelector("img");
-      if (!img) return;
-
-      // Текущий масштаб изображения
-      const currentScale = slide.scale || 1;
-
-      // Ширина viewport Fancybox или fallback на window.innerWidth
-      const viewportWidth = ((_instance$viewport = instance.viewport) === null || _instance$viewport === void 0 ? void 0 : _instance$viewport.width) || window.innerWidth;
-
-      // Ширина отображаемого изображения
-      const displayWidth = img.offsetWidth;
-
-      // Натуральная ширина изображения (оригинальный размер)
-      const naturalWidth = img.naturalWidth;
-      if (currentScale > 1) {
-        // Если сейчас увеличено — сбрасываем к fit (масштаб 1)
-        instance.scaleTo(1, {
-          friction: 0.3
-        });
-      } else {
-        // Вычисляем масштаб для зума ровно до ширины экрана
-        const scaleToWidth = viewportWidth / displayWidth;
-
-        // Не зумим больше оригинального размера
-        const maxScale = naturalWidth / displayWidth;
-        const targetScale = Math.min(scaleToWidth, maxScale);
-        instance.scaleTo(targetScale, {
-          friction: 0.3,
-          pan: false
-        });
-      }
-    },
-    Images: {
-      initialSize: "fit"
-    }
+    contentDblClick: false,
+    dragToClose: false,
+    placeFocusBack: false,
+    gesture: false // Отключить жесты масштабирования (pinch, double tap)
   });
+
   (_document$querySelect = document.querySelector(".submit-btn")) === null || _document$querySelect === void 0 ? void 0 : _document$querySelect.addEventListener("click", function () {
     const name = document.getElementById("name").value;
     const telegram = document.getElementById("telegram").value;
