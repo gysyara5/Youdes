@@ -553,18 +553,26 @@ document.addEventListener("DOMContentLoaded", function () {
     Images: {
       zoom: true,
       zoomMax: 1,
-      // Не больше 100%
       zoomMin: 1,
-      // Не меньше 100%
       panMode: "container"
     },
-    Thumbs: {
-      showOnStart: false
-    },
-    // Важно отключить действия по клику и двойному тапу
+    // Отключаем действия по клику и двойному тапу
     click: false,
     dblClick: false,
-    Wheel: false
+    Wheel: false,
+    // Переопределяем поведение при готовности слайда
+    on: {
+      'initSlide': (fancybox, slide) => {
+        // Убираем встроенный зум при двойном тапе
+        if (slide.panzoom) {
+          slide.panzoom.setZoom(1, {
+            friction: 0
+          });
+          slide.panzoom.options.maxScale = 1;
+          slide.panzoom.options.minScale = 1;
+        }
+      }
+    }
   });
   (_document$querySelect = document.querySelector(".submit-btn")) === null || _document$querySelect === void 0 ? void 0 : _document$querySelect.addEventListener("click", function () {
     const name = document.getElementById("name").value;
