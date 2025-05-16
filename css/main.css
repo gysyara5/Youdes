@@ -2592,7 +2592,6 @@ a {
 
 .fancybox-container:has(.fancybox-image) {
   padding: 0;
-  background-color: #101010;
 }
 
 .fancybox-slide--image {
@@ -2613,6 +2612,15 @@ a {
 .is-close-btn {
   padding: 0;
   border: none;
+}
+
+.fancybox-is-open .fancybox-bg {
+  opacity: 1;
+}
+
+.fancybox-bg {
+  opacity: 0;
+  background-color: #101010;
 }
 
 .header {

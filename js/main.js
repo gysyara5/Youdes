@@ -611,6 +611,8 @@ document.addEventListener("DOMContentLoaded", function () {
     touch: false,
     // Полностью отключает жесты
     click: false,
+    backdrop: false,
+    // Отключаем стандартный оверлей
     buttons: [],
     toolbar: false,
     arrows: false,
