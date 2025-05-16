@@ -575,10 +575,11 @@ document.addEventListener("DOMContentLoaded", function () {
             e.preventDefault();
             const centerX = ((_panzoom$center = panzoom.center) === null || _panzoom$center === void 0 ? void 0 : _panzoom$center.x) ?? containerWidth / 2;
             const centerY = ((_panzoom$center2 = panzoom.center) === null || _panzoom$center2 === void 0 ? void 0 : _panzoom$center2.y) ?? containerHeight / 2;
-            if (Math.abs(panzoom.scale - 1) < 0.01) {
-              panzoom.zoomTo(centerX, centerY, desiredZoom);
-            } else {
+            const isZoomedIn = panzoom.scale > 1.01;
+            if (isZoomedIn) {
               panzoom.zoomTo(centerX, centerY, 1);
+            } else {
+              panzoom.zoomTo(centerX, centerY, desiredZoom);
             }
           }
           imageEl.lastTapTime = currentTime;
