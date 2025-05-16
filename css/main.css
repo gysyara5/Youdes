@@ -2534,6 +2534,15 @@ a {
   object-fit: contain !important;
   transform: none !important;
 } */
+.fancybox-container:has(.fancybox-image) {
+  padding: 0;
+  background-color: #101010;
+}
+
+.fancybox-slide--image {
+  padding: 36px 30px;
+}
+
 .header {
   padding-top: 30px;
   /*  margin-bottom: clamp(0.938rem, -14.986rem + 35.26vh, 7.813rem); */

@@ -544,14 +544,6 @@ document.addEventListener("DOMContentLoaded", function () {
   } else {
     console.error("Один из элементов не найден на странице");
   }
-  Fancybox.bind("[data-fancybox]", {
-    contentClick: false,
-    contentDblClick: false,
-    dragToClose: false,
-    placeFocusBack: false,
-    gesture: false // Отключить жесты масштабирования (pinch, double tap)
-  });
-
   (_document$querySelect = document.querySelector(".submit-btn")) === null || _document$querySelect === void 0 ? void 0 : _document$querySelect.addEventListener("click", function () {
     const name = document.getElementById("name").value;
     const telegram = document.getElementById("telegram").value;
@@ -608,6 +600,12 @@ document.addEventListener("DOMContentLoaded", function () {
         swiperInfoGraph.updateProgress(); // Обновление прогрессбара
       }
     }, 50);
+  });
+  $('[data-fancybox="images"]').fancybox({
+    buttons: [],
+    arrows: false,
+    infobar: false,
+    toolbar: false
   });
 });
 
