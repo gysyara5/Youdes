@@ -546,22 +546,25 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   Fancybox.bind("[data-fancybox]", {
     backdrop: false,
-    // Убирает затемнение
     dragToClose: false,
-    // Отключает свайп закрытие  Navigation: false,
-
     Toolbar: {
-      persist: false // 🔥 предотвращает его скрытие
+      persist: false
     },
-
     Images: {
       zoom: true,
-      zoomMax: 1 // Максимальный зум, по умолчанию 2. Можно поставить 1.5 или меньше
+      zoomMax: 1,
+      zoomMin: 1,
+      // 👈 Добавляем минимальный зум = 1
+      panMode: "container" // 👈 Оставляем стандартное поведение панорамирования
     },
 
     Thumbs: {
       showOnStart: false
-    }
+    },
+    // Отключим колесо мыши и двойной клик, если не нужен дополнительный зум
+    Wheel: false,
+    click: false,
+    dblClick: false
   });
   (_document$querySelect = document.querySelector(".submit-btn")) === null || _document$querySelect === void 0 ? void 0 : _document$querySelect.addEventListener("click", function () {
     const name = document.getElementById("name").value;
