@@ -546,13 +546,10 @@ document.addEventListener("DOMContentLoaded", function () {
   }
   Fancybox.bind("[data-fancybox]", {
     Images: {
-      zoom: false // отключаем встроенный зум
+      zoom: false
     },
-
     click: false,
-    // отключаем клик
     dblClick: false,
-    // отключаем двойной клик
     dragToClose: false,
     backdrop: false,
     on: {
@@ -568,21 +565,22 @@ document.addEventListener("DOMContentLoaded", function () {
         panzoom.options.minScale = 1;
         panzoom.reset();
         imageEl.style.touchAction = "manipulation";
-        let lastTapTime = 0;
+
+        // Чтобы не вешать много обработчиков, удалим предыдущие если есть
+        imageEl.ondbltap = null;
+        imageEl.lastTapTime = 0;
         imageEl.addEventListener("touchend", e => {
-          const currentTime = new Date().getTime();
-          const tapGap = currentTime - lastTapTime;
+          const currentTime = Date.now();
+          const tapGap = currentTime - (imageEl.lastTapTime || 0);
           if (tapGap > 0 && tapGap < 300) {
-            // Двойной тап
             e.preventDefault();
-            const currentScale = panzoom.scale;
-            if (Math.abs(currentScale - 1) < 0.01) {
+            if (Math.abs(panzoom.scale - 1) < 0.01) {
               panzoom.zoomTo(panzoom.center.x, panzoom.center.y, desiredZoom);
             } else {
               panzoom.zoomTo(panzoom.center.x, panzoom.center.y, 1);
             }
           }
-          lastTapTime = currentTime;
+          imageEl.lastTapTime = currentTime;
         }, {
           passive: false
         });
