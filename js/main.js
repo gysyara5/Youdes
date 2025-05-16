@@ -549,14 +549,12 @@ document.addEventListener("DOMContentLoaded", function () {
     Images: {
       zoom: true,
       zoomMax: 1,
-      // Эти значения будут переопределены вручную ниже
       zoomMin: 1,
       panMode: "container"
     },
     Wheel: false,
     click: false,
     dblClick: false,
-    // Отключим встроенное поведение
     dragToClose: false,
     backdrop: false,
     on: {
@@ -566,39 +564,39 @@ document.addEventListener("DOMContentLoaded", function () {
           const containerWidth = panzoom.container.offsetWidth;
           const imageEl = panzoom.content;
           const imageNaturalWidth = imageEl.naturalWidth;
-          if (containerWidth && imageNaturalWidth) {
-            const desiredZoom = containerWidth / imageNaturalWidth;
-            panzoom.options.maxScale = desiredZoom;
-            panzoom.options.minScale = 1;
-            panzoom.reset();
+          if (!containerWidth || !imageNaturalWidth) return;
+          const desiredZoom = containerWidth / imageNaturalWidth;
+          panzoom.options.maxScale = desiredZoom;
+          panzoom.options.minScale = 1;
+          panzoom.reset();
+          imageEl.style.touchAction = "manipulation";
 
-            // Отключаем pinch
-            imageEl.style.touchAction = "manipulation";
-
-            // ✅ Добавим поведение двойного тапа
-            let lastTap = 0;
-            imageEl.addEventListener("touchend", e => {
-              const currentTime = new Date().getTime();
-              const tapLength = currentTime - lastTap;
-              if (tapLength < 300 && tapLength > 0) {
-                // двойной тап
-                e.preventDefault();
-                const currentScale = panzoom.scale;
-                if (Math.abs(currentScale - 1) < 0.01) {
-                  // зум вперёд
-                  panzoom.zoomTo(panzoom.center.x, panzoom.center.y, desiredZoom);
-                } else {
-                  // зум назад
-                  panzoom.zoomTo(panzoom.center.x, panzoom.center.y, 1);
-                }
+          // 🔁 Двойной тап реализация
+          let lastTapTime = 0;
+          imageEl.addEventListener("touchend", e => {
+            const currentTime = new Date().getTime();
+            const tapInterval = currentTime - lastTapTime;
+            if (tapInterval < 300 && tapInterval > 0) {
+              // Это двойной тап
+              e.preventDefault();
+              const currentScale = panzoom.scale;
+              if (Math.abs(currentScale - 1) < 0.01) {
+                // Зум вперёд
+                panzoom.zoomTo(panzoom.center.x, panzoom.center.y, desiredZoom);
+              } else {
+                // Зум назад
+                panzoom.zoomTo(panzoom.center.x, panzoom.center.y, 1);
               }
-              lastTap = currentTime;
-            });
-          }
+            }
+            lastTapTime = currentTime;
+          }, {
+            passive: false
+          }); // <— важно, чтобы e.preventDefault() сработал
         }
       }
     }
   });
+
   (_document$querySelect = document.querySelector(".submit-btn")) === null || _document$querySelect === void 0 ? void 0 : _document$querySelect.addEventListener("click", function () {
     const name = document.getElementById("name").value;
     const telegram = document.getElementById("telegram").value;
