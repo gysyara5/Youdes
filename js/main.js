@@ -553,18 +553,18 @@ document.addEventListener("DOMContentLoaded", function () {
     Images: {
       zoom: true,
       zoomMax: 1,
+      // Не больше 100%
       zoomMin: 1,
-      // 👈 Добавляем минимальный зум = 1
-      panMode: "container" // 👈 Оставляем стандартное поведение панорамирования
+      // Не меньше 100%
+      panMode: "container"
     },
-
     Thumbs: {
       showOnStart: false
     },
-    // Отключим колесо мыши и двойной клик, если не нужен дополнительный зум
-    Wheel: false,
+    // Важно отключить действия по клику и двойному тапу
     click: false,
-    dblClick: false
+    dblClick: false,
+    Wheel: false
   });
   (_document$querySelect = document.querySelector(".submit-btn")) === null || _document$querySelect === void 0 ? void 0 : _document$querySelect.addEventListener("click", function () {
     const name = document.getElementById("name").value;
