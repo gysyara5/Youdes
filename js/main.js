@@ -554,6 +554,11 @@ document.addEventListener("DOMContentLoaded", function () {
       persist: true // 🔥 предотвращает его скрытие
     },
 
+    Images: {
+      zoom: true,
+      zoomMax: 2 // Максимальный зум, по умолчанию 2. Можно поставить 1.5 или меньше
+    },
+
     Thumbs: {
       showOnStart: false
     }
@@ -592,18 +597,18 @@ document.addEventListener("DOMContentLoaded", function () {
     const popup = document.getElementById("telegram-popup");
     popup.classList.remove("active");
   }
-  document.querySelector('.reset-swiper').addEventListener('click', function () {
-    const moreBlock = document.querySelector('.info-graph-more');
-    const swiperContainer = document.querySelector('.info-graph-swiper');
-    const productList = document.querySelector('.info-graph-product-list');
-    if (moreBlock !== null && moreBlock !== void 0 && moreBlock.classList.contains('active')) {
-      moreBlock.classList.remove('active');
+  document.querySelector(".reset-swiper").addEventListener("click", function () {
+    const moreBlock = document.querySelector(".info-graph-more");
+    const swiperContainer = document.querySelector(".info-graph-swiper");
+    const productList = document.querySelector(".info-graph-product-list");
+    if (moreBlock !== null && moreBlock !== void 0 && moreBlock.classList.contains("active")) {
+      moreBlock.classList.remove("active");
     }
     if (swiperContainer) {
-      swiperContainer.style.display = 'flex';
+      swiperContainer.style.display = "flex";
     }
     if (productList) {
-      productList.style.display = 'none';
+      productList.style.display = "none";
     }
 
     // Прокрутка к первому слайду для freeMode
@@ -950,3 +955,4 @@ __webpack_require__.r(__webpack_exports__);
 
 /******/ })()
 ;
+//# sourceMappingURL=main.js.map
