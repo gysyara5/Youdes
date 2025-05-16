@@ -557,6 +557,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (!slide.panzoom) return;
         const panzoom = slide.panzoom;
         const containerWidth = panzoom.container.offsetWidth;
+        const containerHeight = panzoom.container.offsetHeight;
         const imageEl = panzoom.content;
         const imageNaturalWidth = imageEl.naturalWidth;
         if (!containerWidth || !imageNaturalWidth) return;
@@ -565,19 +566,19 @@ document.addEventListener("DOMContentLoaded", function () {
         panzoom.options.minScale = 1;
         panzoom.reset();
         imageEl.style.touchAction = "manipulation";
-
-        // Чтобы не вешать много обработчиков, удалим предыдущие если есть
-        imageEl.ondbltap = null;
         imageEl.lastTapTime = 0;
         imageEl.addEventListener("touchend", e => {
           const currentTime = Date.now();
           const tapGap = currentTime - (imageEl.lastTapTime || 0);
           if (tapGap > 0 && tapGap < 300) {
+            var _panzoom$center, _panzoom$center2;
             e.preventDefault();
+            const centerX = ((_panzoom$center = panzoom.center) === null || _panzoom$center === void 0 ? void 0 : _panzoom$center.x) ?? containerWidth / 2;
+            const centerY = ((_panzoom$center2 = panzoom.center) === null || _panzoom$center2 === void 0 ? void 0 : _panzoom$center2.y) ?? containerHeight / 2;
             if (Math.abs(panzoom.scale - 1) < 0.01) {
-              panzoom.zoomTo(panzoom.center.x, panzoom.center.y, desiredZoom);
+              panzoom.zoomTo(centerX, centerY, desiredZoom);
             } else {
-              panzoom.zoomTo(panzoom.center.x, panzoom.center.y, 1);
+              panzoom.zoomTo(centerX, centerY, 1);
             }
           }
           imageEl.lastTapTime = currentTime;
