@@ -36,6 +36,12 @@ html {
   scroll-behavior: smooth;
 }
 
+html,
+body {
+  -ms-touch-action: none;
+  touch-action: none;
+}
+
 *,
 *::before,
 *::after {
@@ -2753,15 +2759,6 @@ a {
     -ms-flex-pack: start;
     justify-content: flex-start;
   }
-}
-
-.fancybox__content {
-  -ms-touch-action: none;
-  touch-action: none;
-}
-.fancybox__content img {
-  -ms-touch-action: none;
-  touch-action: none;
 }
 
 .header {
