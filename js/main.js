@@ -600,15 +600,13 @@ document.addEventListener("DOMContentLoaded", function () {
   });
   Fancybox.bind("[data-fancybox]", {
     contentClick: false,
-    contentDblClick: "toggleZoom",
+    contentDblClick: false,
     dragToClose: false,
     groupAttr: "",
     groupAll: false,
     keyboard: false,
     defaultType: "image",
-    // явно указываем тип
     animated: false,
-    // ❗️ Важно — отключаем управление history
     l10n: {},
     closeButton: "inside",
     backdropClick: "close",
