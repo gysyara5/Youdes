@@ -2057,6 +2057,7 @@ a {
 @media (max-width: 576px) {
   .offer-popup .popup-text-normal {
     font-size: 15px;
+    line-height: 23px;
   }
 }
 .offer-popup .popup-text-normal a {
@@ -2356,6 +2357,8 @@ a {
 @media (max-width: 576px) {
   .telegram-popup .popup-container .logo {
     margin-bottom: 80px;
+    width: 54px;
+    height: 39px;
   }
 }
 .telegram-popup .popup-container form {
@@ -2756,7 +2759,7 @@ a {
 }
 
 @media (max-width: 576px) {
-  .fancybox__slide {
+  .fancybox__slide.has-image {
     pointer-events: none;
   }
 }
