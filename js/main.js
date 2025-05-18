@@ -612,7 +612,15 @@ document.addEventListener("DOMContentLoaded", function () {
     backdropClick: "close",
     trapFocus: false
   });
+  const closeButtons = document.querySelectorAll(".popup-text-close");
 
+  // Добавляем обработчик для каждой кнопки
+  closeButtons.forEach(button => {
+    button.addEventListener("click", function (e) {
+      e.preventDefault(); // Отменяем стандартное поведение (если кнопка — ссылка)
+      Fancybox.close(); // Закрываем текущий попап Fancybox
+    });
+  });
   /*   $("[data-fancybox]").fancybox({
     touch: {
       vertical: false,
