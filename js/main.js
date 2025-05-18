@@ -610,15 +610,8 @@ document.addEventListener("DOMContentLoaded", function () {
     l10n: {},
     closeButton: "inside",
     backdropClick: "close",
-    trapFocus: false,
-    Images: {
-      click: false,
-      dblClick: false,
-      zoom: false,
-      Panzoom: false // полностью отключает Panzoom
-    }
+    trapFocus: false
   });
-
   const closeButtons = document.querySelectorAll(".popup-text-close");
 
   // Добавляем обработчик для каждой кнопки
