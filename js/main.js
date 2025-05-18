@@ -612,6 +612,8 @@ document.addEventListener("DOMContentLoaded", function () {
     backdropClick: "close",
     trapFocus: false,
     Images: {
+      click: false,
+      dblClick: false,
       zoom: false,
       Panzoom: false // полностью отключает Panzoom
     }
