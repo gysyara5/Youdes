@@ -612,17 +612,11 @@ document.addEventListener("DOMContentLoaded", function () {
     backdropClick: "close",
     trapFocus: false,
     Images: {
-      Panzoom: {
-        touch: false,
-        // отключает все касания, включая зум и пан
-        zoom: false,
-        // отключает возможность зума
-        pinchToZoom: false,
-        panOnlyZoomed: false,
-        lockAxis: false
-      }
+      zoom: false,
+      Panzoom: false // полностью отключает Panzoom
     }
   });
+
   const closeButtons = document.querySelectorAll(".popup-text-close");
 
   // Добавляем обработчик для каждой кнопки
