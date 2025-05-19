@@ -1631,7 +1631,7 @@ a {
 }
 @media (max-width: 576px) {
   .policy-popup__title {
-    padding: 50px 20px 20px 20px;
+    padding: 20px 20px 20px 20px;
     font-size: 22px;
     line-height: 32px;
   }
@@ -1667,7 +1667,7 @@ a {
 @media (max-width: 576px) {
   .policy-popup__info {
     padding: 20px;
-    padding-bottom: 50px;
+    padding-bottom: 30px;
   }
 }
 .policy-popup__upper-text {
@@ -1932,7 +1932,7 @@ a {
 }
 @media (max-width: 576px) {
   .offer-popup__title {
-    padding: 50px 20px 20px 20px;
+    padding: 20px 20px 20px 20px;
     font-size: 22px;
   }
 }
@@ -1967,7 +1967,7 @@ a {
 @media (max-width: 576px) {
   .offer-popup__info {
     padding: 20px;
-    padding-bottom: 50px;
+    padding-bottom: 30px;
   }
 }
 .offer-popup__desc {
@@ -2107,6 +2107,11 @@ a {
 .fancybox__slide.has-image {
   padding: 36px 30px;
   background-color: #101010;
+}
+@media (max-width: 576px) {
+  .fancybox__slide.has-image {
+    padding: 20px;
+  }
 }
 
 .info-graph-projects-swiper {
@@ -2356,7 +2361,7 @@ a {
 }
 @media (max-width: 576px) {
   .telegram-popup .popup-container .logo {
-    margin-bottom: 80px;
+    margin-bottom: 50px;
     width: 54px;
     height: 39px;
   }
