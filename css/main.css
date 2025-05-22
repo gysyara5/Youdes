@@ -370,6 +370,7 @@ a {
   .info-graph-swiper {
     margin-right: -120px;
     padding-right: 120px;
+    padding-top: 20px;
   }
 }
 @media (max-width: 1024px) {
@@ -437,9 +438,9 @@ a {
   }
 }
 .info-graph-swiper .swiper-slide:hover .info-graph-item-bottom {
-  -webkit-transform: translate(-50%, 0);
-  -ms-transform: translate(-50%, 0);
-  transform: translate(-50%, 0);
+  -webkit-transform: translate(0, 0);
+  -ms-transform: translate(0, 0);
+  transform: translate(0, 0);
   pointer-events: all;
 }
 
@@ -449,15 +450,15 @@ a {
   background-color: #101010;
   position: absolute;
   bottom: 0;
-  left: 50%;
-  width: calc(100% + 1px);
+  left: -1px;
+  width: calc(100% + 2px);
   -webkit-transition: 0.3s;
   -o-transition: 0.3s;
   transition: 0.3s;
   pointer-events: none;
-  -webkit-transform: translate(-50%, 100%);
-  -ms-transform: translate(-50%, 100%);
-  transform: translate(-50%, 100%);
+  -webkit-transform: translate(0, 100%);
+  -ms-transform: translate(0, 100%);
+  transform: translate(0, 100%);
 }
 @media (max-width: 1024px) {
   .info-graph-item-bottom {
@@ -531,6 +532,11 @@ a {
   -ms-flex-align: center;
   align-items: center;
 }
+@media (min-width: 1921px) {
+  .model-graph-swiper .swiper-wrapper {
+    padding-top: 20px;
+  }
+}
 .model-graph-swiper .swiper-slide {
   background: unset;
   display: -webkit-box;
@@ -549,12 +555,12 @@ a {
 }
 @media (max-width: 1024px) {
   .model-graph-swiper .swiper-nav {
-    margin-top: 100px;
+    margin-top: 0;
   }
 }
 @media (max-width: 576px) {
   .model-graph-swiper .swiper-nav {
-    margin-top: 50px;
+    margin-top: 0;
   }
 }
 .model-graph-swiper .swiper-slide img {
@@ -594,12 +600,12 @@ a {
 @media (max-width: 1024px) {
   .model-graph-swiper {
     width: 100%;
-    margin-top: 20px;
+    margin-top: -80px;
   }
 }
 @media (max-width: 576px) {
   .model-graph-swiper {
-    margin-top: 0;
+    margin-top: -52px;
   }
 }
 
@@ -3084,6 +3090,75 @@ a {
   }
 }
 
+.tab-video {
+  max-width: clamp(360px, 83vmin, 780px);
+  /*   max-width: 780px; */
+}
+@media (max-width: 1440px) {
+  .tab-video {
+    /*     max-width: 728px; */
+    max-width: clamp(360px, 83vmin, 728px);
+  }
+}
+@media (max-width: 1024px) {
+  .tab-video {
+    max-width: 586px;
+  }
+}
+@media (max-width: 576px) {
+  .tab-video {
+    max-width: 373px;
+  }
+}
+
+.tab-video-container {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  position: relative;
+  overflow: hidden;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+}
+
+.tab-video {
+  width: 100%;
+  height: auto;
+  display: block;
+  -o-object-fit: contain;
+  object-fit: contain;
+}
+
+/* Малая зона для наведения */
+.play-hover-zone {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: calc(100% - 120px);
+  height: calc(100% - 125px);
+  z-index: 2;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  cursor: pointer;
+  /*   background-color: rgba(255, 255, 255, 0.2); */
+}
+
+.play-hover-zone-container {
+  position: relative;
+}
+
+.info-graph-projects-swiper {
+  margin-left: 0;
+}
+
 .header {
   padding-top: 30px;
 }
@@ -3147,6 +3222,13 @@ a {
   -ms-transform: translateX(140px);
   transform: translateX(140px);
 }
+@media (min-width: 1921px) {
+  .hero__content.project-visible .tabs__nav {
+    -webkit-transform: translateX(220px);
+    -ms-transform: translateX(220px);
+    transform: translateX(220px);
+  }
+}
 .hero__content.project-visible .hero__info {
   -webkit-transform: translateX(-100%);
   -ms-transform: translateX(-100%);
@@ -3183,13 +3265,14 @@ a {
   -webkit-animation: footerOut 0.3s forwards;
   animation: footerOut 0.3s forwards;
 }
-.hero__content.project-visible .info-graph-projects-swiper {
+.hero__content.project-visible .info-graph-projects-swiper.active {
   visibility: visible;
   position: relative;
   left: 0;
 }
 @media (min-width: 1921px) {
-  .hero__content.project-visible .info-graph-projects-swiper {
+  .hero__content.project-visible .info-graph-projects-swiper.active {
+    padding-top: 20px;
     padding-right: 120px;
     margin-right: -120px;
   }

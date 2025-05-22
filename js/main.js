@@ -226,6 +226,39 @@ __webpack_require__.r(__webpack_exports__);
 const tabs = new graph_tabs__WEBPACK_IMPORTED_MODULE_0__["default"]("tab");
 document.addEventListener("DOMContentLoaded", function () {
   var _document$querySelect;
+  const secondBtn = document.querySelector(".tabs__nav-btn.second");
+  const video = document.querySelector(".tab-video");
+  const hoverZone = document.querySelector(".play-hover-zone");
+  let hasPlayedOnce = false;
+  if (secondBtn && video && hoverZone) {
+    // Первый запуск по кнопке
+    secondBtn.addEventListener("click", function () {
+      if (!hasPlayedOnce) {
+        video.play();
+        hasPlayedOnce = true;
+
+        // После завершения сбрасываем
+        video.addEventListener("ended", () => {
+          video.pause();
+          video.currentTime = 0;
+        });
+      }
+    });
+
+    // Воспроизведение при наведении на маленькую зону
+    hoverZone.addEventListener("mouseenter", function () {
+      if (hasPlayedOnce) {
+        video.play();
+      }
+    });
+    hoverZone.addEventListener("mouseleave", function () {
+      if (hasPlayedOnce) {
+        video.pause();
+        video.currentTime = 0;
+      }
+    });
+  }
+
   // Открытие попапа при клике на кнопки с классом hero__link
   const openButtons = document.querySelectorAll(".hero__link");
   const popup = document.getElementById("telegram-popup");
@@ -347,50 +380,68 @@ document.addEventListener("DOMContentLoaded", function () {
   const tabsNavButtons = document.querySelectorAll(".tabs__nav-btn");
   const heroContent = document.querySelector(".hero__content");
   const infoGraphButton = document.querySelector(".info-graph-button");
+  const allSwipers = document.querySelectorAll(".info-graph-projects-swiper");
 
-  // Обработка кнопок project-open (переключает класс)
+  // Автоматически добавляем ID слайдерам и data-target кнопкам
+  allSwipers.forEach((swiper, index) => {
+    swiper.id = `project-swiper-${index + 1}`; // project-swiper-1, project-swiper-2...
+  });
+
+  projectOpenButtons.forEach((button, index) => {
+    button.setAttribute("data-target", `project-swiper-${index + 1}`);
+  });
+
+  // Обработка кнопок project-open
   if (projectOpenButtons && heroContent) {
     projectOpenButtons.forEach(button => {
       button.addEventListener("click", () => {
-        heroContent.classList.toggle("project-visible");
+        heroContent.classList.add("project-visible");
+        const targetSwiperId = button.getAttribute("data-target");
+        document.querySelectorAll(".info-graph-projects-swiper").forEach(swiper => {
+          swiper.classList.remove("active");
+        });
+        if (targetSwiperId) {
+          const targetSwiper = document.getElementById(targetSwiperId);
+          if (targetSwiper) targetSwiper.classList.add("active");
+        }
       });
     });
   }
+
+  // Остальной код (homeBackButtons и tabsNavButtons) остается без изменений
+  // ...
 
   // Обработка кнопок home-back
   if (homeBackButtons && heroContent) {
     homeBackButtons.forEach(button => {
       button.addEventListener("click", () => {
         if (heroContent.classList.contains("project-visible")) {
-          // Если есть класс project-visible
           heroContent.classList.remove("project-visible");
 
-          // Удаляем класс animate у всех кнопок табов
+          // Удаляем класс active у всех слайдеров
+          document.querySelectorAll(".info-graph-projects-swiper").forEach(swiper => {
+            swiper.classList.remove("active");
+          });
           tabsNavButtons.forEach(btn => {
             btn.classList.remove("animate");
           });
         } else if (infoGraphButton) {
-          // Если нет класса project-visible, кликаем по info-graph-button
           infoGraphButton.click();
         }
       });
     });
   }
 
-  // Обработка кнопок tabs__nav-btn (удаляет класс project-visible)
+  // Обработка кнопок tabs__nav-btn
   if (tabsNavButtons && heroContent) {
     tabsNavButtons.forEach(button => {
       button.addEventListener("click", () => {
         heroContent.classList.remove("project-visible");
-      });
-    });
-  }
 
-  // Обработка кнопок tabs__nav-btn (удаляет класс project-visible)
-  if (tabsNavButtons && heroContent) {
-    tabsNavButtons.forEach(button => {
-      button.addEventListener("click", () => {
-        heroContent.classList.remove("project-visible");
+        // Удаляем класс active у всех слайдеров
+        document.querySelectorAll(".info-graph-projects-swiper").forEach(swiper => {
+          swiper.classList.remove("active");
+        });
       });
     });
   }
@@ -444,8 +495,10 @@ document.addEventListener("DOMContentLoaded", function () {
         slidesPerView: _popperjs_core__WEBPACK_IMPORTED_MODULE_1__.auto,
         spaceBetween: 30
       }
-    }
+    },
+    watchOverflow: false // ВАЖНО
   });
+
   const swiperModelGraph = new Swiper(".model-graph-swiper", {
     slidesPerView: 1,
     spaceBetween: 100,
@@ -510,6 +563,7 @@ document.addEventListener("DOMContentLoaded", function () {
       type: "progressbar"
     }
   });
+
   // Находим элементы
   const toggleButton = document.querySelector(".info-graph-more");
   const swiperBlock = document.querySelector(".info-graph-swiper");
