@@ -574,7 +574,8 @@ document.addEventListener("DOMContentLoaded", function () {
     pagination: {
       el: ".swiper-progressbar",
       type: "progressbar"
-    }
+    },
+    watchOverflow: false
   });
 
   // Находим элементы
@@ -687,6 +688,38 @@ document.addEventListener("DOMContentLoaded", function () {
       e.preventDefault(); // Отменяем стандартное поведение (если кнопка — ссылка)
       Fancybox.close(); // Закрываем текущий попап Fancybox
     });
+  });
+
+  const swipers = document.querySelectorAll(".info-graph-projects-swiper"); // Все слайдеры
+  const heroTabs = document.querySelector(".hero__tabs"); // Контейнер с padding
+
+  if (!swipers.length || !heroTabs) {
+    console.log("Слайдеры или hero__tabs не найдены!");
+    return;
+  }
+
+  // Функция проверки для одного слайдера
+  function checkSwiperWidth(swiper) {
+    const screenWidth = window.innerWidth;
+    const heroTabsPaddingRight = parseFloat(getComputedStyle(heroTabs).paddingRight);
+    const swiperWidth = swiper.offsetWidth;
+    if (swiperWidth < screenWidth + heroTabsPaddingRight) {
+      swiper.classList.add("swiper-full");
+    } else {
+      swiper.classList.remove("swiper-full");
+    }
+  }
+
+  // Проверяем все слайдеры при загрузке
+  swipers.forEach(checkSwiperWidth);
+
+  // Оптимизированный обработчик ресайза (debounce)
+  let resizeTimeout;
+  window.addEventListener("resize", () => {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(() => {
+      swipers.forEach(checkSwiperWidth);
+    }, 100);
   });
 });
 

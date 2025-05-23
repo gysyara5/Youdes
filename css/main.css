@@ -3164,6 +3164,12 @@ a {
   margin-left: 0;
 }
 
+.swiper-full {
+  margin-right: 0;
+  padding-right: 0;
+  width: 100%;
+}
+
 .header {
   padding-top: 30px;
 }
