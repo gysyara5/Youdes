@@ -3229,9 +3229,9 @@ a {
 }
 @media (min-width: 1921px) {
   .hero__content.project-visible .tabs__nav {
-    -webkit-transform: translateX(220px);
-    -ms-transform: translateX(220px);
-    transform: translateX(220px);
+    -webkit-transform: translateX(163px);
+    -ms-transform: translateX(163px);
+    transform: translateX(163px);
   }
 }
 .hero__content.project-visible .hero__info {

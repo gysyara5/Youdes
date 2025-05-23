@@ -229,30 +229,32 @@ document.addEventListener("DOMContentLoaded", function () {
   const secondBtn = document.querySelector(".tabs__nav-btn.second");
   const video = document.querySelector(".tab-video");
   const hoverZone = document.querySelector(".play-hover-zone");
-  let hasPlayedOnce = false;
   if (secondBtn && video && hoverZone) {
-    // Первый запуск по кнопке
+    // Воспроизведение при каждом клике на вкладку
     secondBtn.addEventListener("click", function () {
-      if (!hasPlayedOnce) {
-        video.play();
-        hasPlayedOnce = true;
+      video.currentTime = 0; // Сбрасываем на начало
+      video.play(); // Запускаем
 
-        // После завершения сбрасываем
-        video.addEventListener("ended", () => {
-          video.pause();
-          video.currentTime = 0;
-        });
-      }
+      // После завершения сбрасываем
+      video.addEventListener("ended", () => {
+        video.pause();
+        video.currentTime = 0;
+      }, {
+        once: true
+      }); // Обработчик сработает только один раз
     });
 
-    // Воспроизведение при наведении на маленькую зону
+    // Воспроизведение при наведении на зону (если видео не играет)
     hoverZone.addEventListener("mouseenter", function () {
-      if (hasPlayedOnce) {
+      if (video.paused) {
+        video.currentTime = 0;
         video.play();
       }
     });
+
+    // Пауза при уходе с зоны
     hoverZone.addEventListener("mouseleave", function () {
-      if (hasPlayedOnce) {
+      if (!video.paused) {
         video.pause();
         video.currentTime = 0;
       }
@@ -384,12 +386,22 @@ document.addEventListener("DOMContentLoaded", function () {
 
   // Автоматически добавляем ID слайдерам и data-target кнопкам
   allSwipers.forEach((swiper, index) => {
-    swiper.id = `project-swiper-${index + 1}`; // project-swiper-1, project-swiper-2...
+    swiper.id = `project-swiper-${index + 1}`;
   });
-
   projectOpenButtons.forEach((button, index) => {
     button.setAttribute("data-target", `project-swiper-${index + 1}`);
   });
+
+  // Функция для сброса слайдера swiperInfoGraph
+  function resetInfoGraphSlider() {
+    setTimeout(() => {
+      if (typeof swiperInfoGraph !== "undefined" && swiperInfoGraph) {
+        swiperInfoGraph.slideTo(0, 0);
+        swiperInfoGraph.setTranslate(0);
+        swiperInfoGraph.updateProgress();
+      }
+    }, 500);
+  }
 
   // Обработка кнопок project-open
   if (projectOpenButtons && heroContent) {
@@ -407,11 +419,6 @@ document.addEventListener("DOMContentLoaded", function () {
       });
     });
   }
-
-  // Остальной код (homeBackButtons и tabsNavButtons) остается без изменений
-  // ...
-
-  // Обработка кнопок home-back
   if (homeBackButtons && heroContent) {
     homeBackButtons.forEach(button => {
       button.addEventListener("click", () => {
@@ -425,6 +432,8 @@ document.addEventListener("DOMContentLoaded", function () {
           tabsNavButtons.forEach(btn => {
             btn.classList.remove("animate");
           });
+
+          // УБРАН вызов resetInfoGraphSlider() для home-back
         } else if (infoGraphButton) {
           infoGraphButton.click();
         }
@@ -432,7 +441,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // Обработка кнопок tabs__nav-btn
+  // Обработка кнопок tabs__nav-btn (сброс остается)
   if (tabsNavButtons && heroContent) {
     tabsNavButtons.forEach(button => {
       button.addEventListener("click", () => {
@@ -442,6 +451,9 @@ document.addEventListener("DOMContentLoaded", function () {
         document.querySelectorAll(".info-graph-projects-swiper").forEach(swiper => {
           swiper.classList.remove("active");
         });
+
+        // Сброс слайдера swiperInfoGraph (остается только здесь)
+        resetInfoGraphSlider();
       });
     });
   }
@@ -496,9 +508,8 @@ document.addEventListener("DOMContentLoaded", function () {
         spaceBetween: 30
       }
     },
-    watchOverflow: false // ВАЖНО
+    watchOverflow: false
   });
-
   const swiperModelGraph = new Swiper(".model-graph-swiper", {
     slidesPerView: 1,
     spaceBetween: 100,
@@ -517,8 +528,10 @@ document.addEventListener("DOMContentLoaded", function () {
     pagination: {
       el: ".swiper-progressbar",
       type: "progressbar"
-    }
+    },
+    watchOverflow: false // ВАЖНО
   });
+
   const swiperInfoGraphProject = new Swiper(".info-graph-projects-swiper", {
     slidesPerView: 3,
     spaceBetween: 30,
@@ -675,28 +688,6 @@ document.addEventListener("DOMContentLoaded", function () {
       Fancybox.close(); // Закрываем текущий попап Fancybox
     });
   });
-  /*   $("[data-fancybox]").fancybox({
-    touch: {
-      vertical: false,
-      momentum: false,
-    },
-    click: false,
-    wheel: "zoom",
-    dblclick: "close",
-    backdrop: false,
-    buttons: [],
-    toolbar: false,
-    arrows: false,
-    infobar: false,
-    afterShow: function (instance, current) {
-      $(".is-close-btn").on("click", function () {
-        $.fancybox.close();
-      });
-       // ❌ Отключаем перетаскивание
-      instance.$refs.stage.off("touchstart.fb");
-      instance.$refs.container.off("touchstart.fb");
-    },
-  }); */
 });
 
 /***/ }),
