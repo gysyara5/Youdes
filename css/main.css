@@ -44,10 +44,34 @@ html {
   scrollbar-width: none;
 }
 
+* {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none; /* запрещает выделение */
+}
+
 .page {
   height: 100%;
   font-family: var(--font-family, sans-serif);
   -webkit-text-size-adjust: 100%;
+}
+
+label {
+  -webkit-tap-highlight-color: transparent;
+  tap-highlight-color: transparent;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+label:active {
+  background-color: transparent;
+}
+
+input[type=checkbox] {
+  -webkit-tap-highlight-color: transparent;
 }
 
 .page__body {
@@ -1364,6 +1388,8 @@ a {
   -ms-user-select: none;
   user-select: none;
   margin-bottom: 30px;
+  -webkit-tap-highlight-color: transparent; /* Убирает синий фон при тапе */
+  tap-highlight-color: transparent; /* Для современных браузеров */
 }
 @media (min-width: 1921px) {
   .checkbox-item {
@@ -3153,7 +3179,8 @@ a {
   -ms-transform: translate(-50%, -50%);
   transform: translate(-50%, -50%);
   cursor: pointer;
-  /*   background-color: rgba(255, 255, 255, 0.2); */
+  -webkit-tap-highlight-color: transparent;
+  tap-highlight-color: transparent;
 }
 
 .play-hover-zone-container {
@@ -3948,7 +3975,7 @@ a {
 }
 @media (max-width: 1024px) and (max-width: 576px) {
   .hero__tabs-upper-link:last-child img {
-    width: 25px;
+    min-width: 25px;
     height: 14px;
     min-height: unset;
   }
@@ -4209,6 +4236,14 @@ a {
     -webkit-box-pack: unset;
     -ms-flex-pack: unset;
     justify-content: unset;
+  }
+}
+@media (max-width: 374px) {
+  .footer__content {
+    gap: 0;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
   }
 }
 .footer__copy {

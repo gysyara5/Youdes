@@ -84,9 +84,6 @@
             преимущества стильной инфографикой!
           </p>
 
-          <!--   <a href="#telegram-popup" data-fancybox class="hero__link"
-            >Обсудить проект <img src="./img/button-link-icon.svg" alt=""
-          /></a> -->
           <button type="button" class="hero__link btn-reset">
             Обсудить проект <img src="./img/button-link-icon.svg" alt="" />
           </button>
@@ -120,7 +117,9 @@
           <a href="#policy-popup" data-fancybox class="footer__link"
             >Политика конфиденциальности</a
           >
-          <a href="#offer-popup" data-fancybox class="footer__link">Оферта</a>
+          <a href="#offer-popup" data-fancybox class="footer__link"
+            >Оферта</a
+          >
         </div>
       </footer>
     </div>
@@ -151,10 +150,12 @@
             </li>
           </ul>
           <div class="hero__tabs-upper-links">
-            <a href="#" class="hero__tabs-upper-link"
+            <a href="https://t.me/youdes" class="hero__tabs-upper-link"
               ><img src="./img/icon_tg.svg" alt=""
             /></a>
-            <a href="#" class="hero__tabs-upper-link"
+            <a
+              href="https://www.behance.net/youdesdesign"
+              class="hero__tabs-upper-link"
               ><img src="./img/icon_be.svg" alt=""
             /></a>
           </div>
@@ -1491,7 +1492,7 @@
               <div class="swiper model-graph-swiper">
                 <div class="swiper-wrapper">
                   <div class="swiper-slide">
-                    <div class="tab-video-container is-desk">
+                    <div class="tab-video-container">
                       <div class="play-hover-zone-container">
                         <video
                           class="tab-video"
@@ -1508,14 +1509,6 @@
                         <div class="play-hover-zone"></div>
                       </div>
                     </div>
-
-                    <video class="tab-video is-mobile" muted autoplay>
-                      <source
-                        src="./img/render-dont-opt.webm"
-                        type="video/webm"
-                      />
-                      Ваш браузер не поддерживает видео.
-                    </video>
                   </div>
                 </div>
 
@@ -1538,10 +1531,16 @@
   <footer class="footer mobile">
     <div class="footer__content">
       <div class="hero__tabs-upper-links">
-        <a href="#" class="hero__tabs-upper-link" class="telegram-icon"
+        <a
+          href="https://t.me/youdes"
+          class="hero__tabs-upper-link"
+          class="telegram-icon"
           ><img src="./img/icon_tg.svg" alt="Telegram"
         /></a>
-        <a href="#" class="hero__tabs-upper-link" class="be-icon"
+        <a
+          href="https://www.behance.net/youdesdesign"
+          class="hero__tabs-upper-link"
+          class="be-icon"
           ><img src="./img/icon_be.svg" alt="Be"
         /></a>
       </div>
@@ -1566,7 +1565,7 @@
         <a href="./index.html" class="logo popup">
           <img src="./img/logo.svg" alt="Logo Youdes" />
         </a>
-        <form action="">
+        <form action="send.php" method="post">
           <div class="popup-title">Мы напишем вам&nbsp;в&nbsp;Telegram!</div>
 
           <div class="input-group name">
@@ -1574,8 +1573,10 @@
             <input
               type="text"
               id="name"
+              name="Имя"
               placeholder="Ваше имя"
               class="input-name"
+              required
             />
           </div>
 
@@ -1584,29 +1585,36 @@
             <input
               type="text"
               id="telegram"
+              name="Telegram"
               placeholder="Логин или ссылка"
               class="input-link"
+              required
             />
           </div>
 
           <div class="checkbox-group">
             <div class="checkbox-item">
-              <label for="privacy" class="">
-                <input type="checkbox" id="privacy" />
+              <label for="privacy">
+                <input
+                  type="checkbox"
+                  id="privacy"
+                  name="Согласие"
+                  value="Принято"
+                  required
+                />
                 <span class="checkmark"></span>
-                <span
-                  >Я даю согласие на обработку моих персональных данных
-                  в&nbsp;соответствии с&nbsp;<a
-                    href="#policy-popup"
-                    data-fancybox
+                <span>
+                  Я даю согласие на обработку моих персональных данных в
+                  соответствии с
+                  <a href="#policy-popup" data-fancybox
                     >Политикой конфиденциальности</a
-                  ></span
-                >
+                  >
+                </span>
               </label>
             </div>
           </div>
 
-          <button type="button" class="submit-btn btn-reset">
+          <button type="submit" class="submit-btn btn-reset">
             Оставить заявку
           </button>
         </form>
@@ -1617,6 +1625,7 @@
       id="policy-popup"
       class="popup-container policy-popup padding-sect"
       style="display: none"
+      data-fancybox="popup"
     >
       <div class="policy-popup__content">
         <button class="is-close-btn">
@@ -1906,6 +1915,7 @@
       id="offer-popup"
       class="popup-container offer-popup"
       style="display: none"
+
     >
       <div class="offer-popup__content">
         <button class="is-close-btn">

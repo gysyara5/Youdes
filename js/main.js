@@ -230,43 +230,70 @@ document.addEventListener("DOMContentLoaded", function () {
   const video = document.querySelector(".tab-video");
   const hoverZone = document.querySelector(".play-hover-zone");
   if (secondBtn && video && hoverZone) {
-    // Воспроизведение при каждом клике на вкладку
+    // ▶ Воспроизведение при клике на кнопку
     secondBtn.addEventListener("click", function () {
-      video.currentTime = 0; // Сбрасываем на начало
-      video.play(); // Запускаем
-
-      // После завершения сбрасываем
+      video.currentTime = 0;
+      video.play();
       video.addEventListener("ended", () => {
         video.pause();
         video.currentTime = 0;
       }, {
         once: true
-      }); // Обработчик сработает только один раз
+      });
     });
 
-    // Воспроизведение при наведении на зону (если видео не играет)
+    // ▶ Наведение мыши
     hoverZone.addEventListener("mouseenter", function () {
       if (video.paused) {
         video.currentTime = 0;
         video.play();
       }
     });
-
-    // Пауза при уходе с зоны
     hoverZone.addEventListener("mouseleave", function () {
       if (!video.paused) {
         video.pause();
         video.currentTime = 0;
       }
     });
-  }
 
-  // Открытие попапа при клике на кнопки с классом hero__link
+    // ▶ Автовоспроизведение при скролле на мобильных устройствах
+    const playOnVisibleMobile = entries => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting && window.innerWidth < 1024 && video.paused) {
+          video.currentTime = 0;
+          video.play();
+          video.addEventListener("ended", () => {
+            video.pause();
+            video.currentTime = 0;
+          }, {
+            once: true
+          });
+        }
+      });
+    };
+    const observer = new IntersectionObserver(playOnVisibleMobile, {
+      threshold: 0.5 // видео должно быть минимум на 50% в зоне видимости
+    });
+
+    observer.observe(video);
+
+    // ▶ Тап по hoverZone для воспроизведения на мобильных
+    hoverZone.addEventListener("touchstart", function () {
+      if (video.paused) {
+        video.currentTime = 0;
+        video.play();
+        video.addEventListener("ended", () => {
+          video.pause();
+          video.currentTime = 0;
+        }, {
+          once: true
+        });
+      }
+    });
+  }
   const openButtons = document.querySelectorAll(".hero__link");
   const popup = document.getElementById("telegram-popup");
   const closeButton = document.querySelector(".popup-close-btn");
-
-  // Переменные для обработки свайпа
   let touchStartX = 0;
   let touchEndX = 0;
   openButtons.forEach(button => {
@@ -276,8 +303,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
   closeButton.addEventListener("click", closePopup);
-
-  // Закрытие при клике вне попапа
   popup.addEventListener("click", function (e) {
     if (e.target === popup) {
       closePopup();
@@ -289,15 +314,11 @@ document.addEventListener("DOMContentLoaded", function () {
   function closePopup() {
     popup.classList.remove("active");
   }
-
-  // Закрытие по ESC
   document.addEventListener("keydown", function (e) {
     if (e.key === "Escape") {
       closePopup();
     }
   });
-
-  // Обработка свайпа для мобильных устройств
   if (window.matchMedia("(max-width: 1023px)").matches) {
     popup.addEventListener("touchstart", function (e) {
       touchStartX = e.changedTouches[0].screenX;
@@ -308,18 +329,12 @@ document.addEventListener("DOMContentLoaded", function () {
     }, false);
   }
   function handleSwipe() {
-    // Определяем минимальное расстояние свайпа для срабатывания (50px)
     const minSwipeDistance = 50;
-
-    // Если свайп влево (start > end) и расстояние достаточное
     if (touchStartX - touchEndX > minSwipeDistance) {
       closePopup();
     }
   }
-
-  // Обработчик изменения размера окна (на случай поворота устройства)
   window.addEventListener("resize", function () {
-    // Если после изменения размера экран стал больше 1023px, удаляем обработчики свайпа
     if (!window.matchMedia("(max-width: 1023px)").matches) {
       popup.removeEventListener("touchstart", function () {});
       popup.removeEventListener("touchend", function () {});
@@ -327,11 +342,8 @@ document.addEventListener("DOMContentLoaded", function () {
   });
   document.querySelector(".tabs__nav").addEventListener("click", function (e) {
     if (e.target.classList.contains("tabs__nav-btn")) {
-      // Удаляем класс у всех кнопок
       const buttonsTabsNav = this.querySelectorAll(".tabs__nav-btn");
       buttonsTabsNav.forEach(btn => btn.classList.remove("animate"));
-
-      // Добавляем класс нажатой кнопке
       e.target.classList.add("animate");
     }
   });
@@ -341,14 +353,12 @@ document.addEventListener("DOMContentLoaded", function () {
   document.querySelector(".input-name").addEventListener("input", function () {
     if (this.value.length > 15) {
       this.value = this.value.slice(0, 15);
-      // Можно также показать сообщение пользователю
       alert("Максимальная длина - 15 символов");
     }
   });
   document.querySelector(".input-link").addEventListener("input", function () {
     if (this.value.length > 30) {
       this.value = this.value.slice(0, 15);
-      // Можно также показать сообщение пользователю
       alert("Максимальная длина - 30 символов");
     }
   });
@@ -356,43 +366,31 @@ document.addEventListener("DOMContentLoaded", function () {
     const footer = document.querySelector("footer");
     const swiperNavs = document.querySelectorAll(".swiper-nav"); // Все элементы навигации
 
-    // Проверяем, что футер существует и экран шире 1024px
     if (footer && window.innerWidth > 1024) {
       const footerHeight = footer.offsetHeight;
-
-      // Применяем margin-bottom ко всем элементам навигации
       swiperNavs.forEach(nav => {
         nav.style.marginBottom = `${footerHeight - 11}px`;
       });
     } else {
-      // Сбрасываем стиль для всех элементов навигации
       swiperNavs.forEach(nav => {
         nav.style.marginBottom = "";
       });
     }
   }
-
-  // Вызываем при загрузке и ресайзе
   window.addEventListener("load", setSwiperNavPosition);
   window.addEventListener("resize", setSwiperNavPosition);
-
-  // Находим все нужные кнопки и блок
   const projectOpenButtons = document.querySelectorAll(".project-open");
   const homeBackButtons = document.querySelectorAll(".home-back");
   const tabsNavButtons = document.querySelectorAll(".tabs__nav-btn");
   const heroContent = document.querySelector(".hero__content");
   const infoGraphButton = document.querySelector(".info-graph-button");
   const allSwipers = document.querySelectorAll(".info-graph-projects-swiper");
-
-  // Автоматически добавляем ID слайдерам и data-target кнопкам
   allSwipers.forEach((swiper, index) => {
     swiper.id = `project-swiper-${index + 1}`;
   });
   projectOpenButtons.forEach((button, index) => {
     button.setAttribute("data-target", `project-swiper-${index + 1}`);
   });
-
-  // Функция для сброса слайдера swiperInfoGraph
   function resetInfoGraphSlider() {
     setTimeout(() => {
       if (typeof swiperInfoGraph !== "undefined" && swiperInfoGraph) {
@@ -402,8 +400,6 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }, 500);
   }
-
-  // Обработка кнопок project-open
   if (projectOpenButtons && heroContent) {
     projectOpenButtons.forEach(button => {
       button.addEventListener("click", () => {
@@ -424,35 +420,25 @@ document.addEventListener("DOMContentLoaded", function () {
       button.addEventListener("click", () => {
         if (heroContent.classList.contains("project-visible")) {
           heroContent.classList.remove("project-visible");
-
-          // Удаляем класс active у всех слайдеров
           document.querySelectorAll(".info-graph-projects-swiper").forEach(swiper => {
             swiper.classList.remove("active");
           });
           tabsNavButtons.forEach(btn => {
             btn.classList.remove("animate");
           });
-
-          // УБРАН вызов resetInfoGraphSlider() для home-back
         } else if (infoGraphButton) {
           infoGraphButton.click();
         }
       });
     });
   }
-
-  // Обработка кнопок tabs__nav-btn (сброс остается)
   if (tabsNavButtons && heroContent) {
     tabsNavButtons.forEach(button => {
       button.addEventListener("click", () => {
         heroContent.classList.remove("project-visible");
-
-        // Удаляем класс active у всех слайдеров
         document.querySelectorAll(".info-graph-projects-swiper").forEach(swiper => {
           swiper.classList.remove("active");
         });
-
-        // Сброс слайдера swiperInfoGraph (остается только здесь)
         resetInfoGraphSlider();
       });
     });
@@ -486,7 +472,6 @@ document.addEventListener("DOMContentLoaded", function () {
         this.slideTo(this.activeIndex, 300);
       }
     },
-    // Оставляем твои breakpoints
     breakpoints: {
       0: {
         spaceBetween: 15,
@@ -553,7 +538,6 @@ document.addEventListener("DOMContentLoaded", function () {
     },
     on: {
       slideChangeTransitionEnd: function () {
-        // Привязка слайдера после окончания инерции
         this.slideTo(this.activeIndex, 300);
       }
     },
@@ -577,20 +561,12 @@ document.addEventListener("DOMContentLoaded", function () {
     },
     watchOverflow: false
   });
-
-  // Находим элементы
   const toggleButton = document.querySelector(".info-graph-more");
   const swiperBlock = document.querySelector(".info-graph-swiper");
   const productListBlock = document.querySelector(".info-graph-product-list");
-
-  // Проверяем, что элементы существуют
   if (toggleButton && swiperBlock && productListBlock) {
-    // Изначально скрываем product-list (если нужно)
     productListBlock.style.display = "none";
-
-    // Добавляем обработчик клика
     toggleButton.addEventListener("click", function () {
-      // Переключаем видимость блоков
       if (swiperBlock.style.display !== "none") {
         swiperBlock.style.display = "none";
         productListBlock.style.display = "grid"; // Используем grid вместо block
@@ -601,7 +577,6 @@ document.addEventListener("DOMContentLoaded", function () {
         toggleButton.classList.remove("active"); // Убираем класс active
       }
 
-      // Обновляем Swiper при повторном показе
       if (typeof swiper !== "undefined" && swiperBlock.style.display === "block") {
         swiper.update();
       }
@@ -609,36 +584,38 @@ document.addEventListener("DOMContentLoaded", function () {
   } else {
     console.error("Один из элементов не найден на странице");
   }
-  (_document$querySelect = document.querySelector(".submit-btn")) === null || _document$querySelect === void 0 ? void 0 : _document$querySelect.addEventListener("click", function () {
-    const name = document.getElementById("name").value;
-    const telegram = document.getElementById("telegram").value;
+  (_document$querySelect = document.querySelector(".submit-btn")) === null || _document$querySelect === void 0 ? void 0 : _document$querySelect.addEventListener("click", function (e) {
+    e.preventDefault();
+    const name = document.getElementById("name").value.trim();
+    const telegram = document.getElementById("telegram").value.trim();
     const privacyChecked = document.getElementById("privacy").checked;
     if (!name || !telegram) {
       alert("Заполните все поля!");
-      return; // ⛔ Прекратить выполнение, не закрывать попап
+      return;
     }
-
     if (!privacyChecked) {
       alert("Подтвердите согласие!");
-      return; // ⛔ Прекратить выполнение, не закрывать попап
+      return;
     }
-
-    // ✅ Все проверки пройдены — продолжаем
-
-    // Отправка данных
-    console.log("Данные:", {
-      name,
-      telegram
+    const formData = new FormData();
+    formData.append("Имя", name);
+    formData.append("Telegram", telegram);
+    fetch("send.php", {
+      method: "POST",
+      body: formData
+    }).then(response => response.json()).then(data => {
+      if (data.status === "success") {
+        document.getElementById("name").value = "";
+        document.getElementById("telegram").value = "";
+        document.getElementById("privacy").checked = false;
+        closePopup();
+      } else {
+        alert("Ошибка отправки. Попробуйте ещё раз.");
+      }
+    }).catch(() => {
+      alert("Ошибка соединения.");
     });
-
-    // Очистка формы
-    document.getElementById("name").value = "";
-    document.getElementById("telegram").value = "";
-    document.getElementById("privacy").checked = false;
-    closePopup(); // <-- Добавлено закрытие попапа
   });
-
-  // Функция закрытия попапа
   function closePopup() {
     const popup = document.getElementById("telegram-popup");
     popup.classList.remove("active");
@@ -656,8 +633,6 @@ document.addEventListener("DOMContentLoaded", function () {
     if (productList) {
       productList.style.display = "none";
     }
-
-    // Прокрутка к первому слайду для freeMode
     setTimeout(() => {
       if (swiperInfoGraph) {
         swiperInfoGraph.slideTo(0, 0); // Моментально
@@ -678,11 +653,32 @@ document.addEventListener("DOMContentLoaded", function () {
     l10n: {},
     closeButton: "inside",
     backdropClick: "close",
-    trapFocus: false
+    trapFocus: false,
+    on: {
+      reveal: (fancybox, slide) => {
+        // Добавляем запись в историю при открытии попапа
+        history.pushState({
+          fancybox: true
+        }, "");
+      },
+      close: (fancybox, slide) => {
+        var _history$state;
+        // Если попап закрыт вручную, убираем добавленное состояние
+        if ((_history$state = history.state) !== null && _history$state !== void 0 && _history$state.fancybox) {
+          history.back();
+        }
+      }
+    }
+  });
+
+  // Закрываем Fancybox при нажатии кнопки "назад"
+  window.addEventListener("popstate", function (event) {
+    var _event$state;
+    if ((_event$state = event.state) !== null && _event$state !== void 0 && _event$state.fancybox) {
+      Fancybox.close();
+    }
   });
   const closeButtons = document.querySelectorAll(".popup-text-close");
-
-  // Добавляем обработчик для каждой кнопки
   closeButtons.forEach(button => {
     button.addEventListener("click", function (e) {
       e.preventDefault(); // Отменяем стандартное поведение (если кнопка — ссылка)
@@ -697,8 +693,6 @@ document.addEventListener("DOMContentLoaded", function () {
     console.log("Слайдеры или hero__tabs не найдены!");
     return;
   }
-
-  // Функция проверки для одного слайдера
   function checkSwiperWidth(swiper) {
     const screenWidth = window.innerWidth;
     const heroTabsPaddingRight = parseFloat(getComputedStyle(heroTabs).paddingRight);
@@ -709,11 +703,7 @@ document.addEventListener("DOMContentLoaded", function () {
       swiper.classList.remove("swiper-full");
     }
   }
-
-  // Проверяем все слайдеры при загрузке
   swipers.forEach(checkSwiperWidth);
-
-  // Оптимизированный обработчик ресайза (debounce)
   let resizeTimeout;
   window.addEventListener("resize", () => {
     clearTimeout(resizeTimeout);
