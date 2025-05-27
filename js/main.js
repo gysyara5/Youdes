@@ -226,6 +226,102 @@ __webpack_require__.r(__webpack_exports__);
 const tabs = new graph_tabs__WEBPACK_IMPORTED_MODULE_0__["default"]("tab");
 document.addEventListener("DOMContentLoaded", function () {
   var _document$querySelect;
+  const productListBlock = document.querySelector(".info-graph-product-list.all");
+  const openProjectButtons = document.querySelectorAll(".open-project-in-all");
+  const infoGraphProductLists = document.querySelectorAll(".info-graph-product-list.projects");
+
+  // Привязка data-атрибутов и id по порядку
+  openProjectButtons.forEach((openProjectButton, index) => {
+    const infoGraphProductList = infoGraphProductLists[index];
+    if (infoGraphProductList) {
+      let infoGraphProductListId = infoGraphProductList.id;
+      if (!infoGraphProductListId) {
+        infoGraphProductListId = `project-${index + 1}`;
+        infoGraphProductList.id = infoGraphProductListId;
+      }
+      openProjectButton.id = `open-project-in-all-${index + 1}`;
+      openProjectButton.setAttribute("data-target-id", infoGraphProductListId);
+    }
+  });
+
+  // Обработка кликов
+  openProjectButtons.forEach(openProjectButton => {
+    openProjectButton.addEventListener("click", () => {
+      const targetId = openProjectButton.dataset.targetId;
+
+      // Скрываем productListBlock
+      if (productListBlock) {
+        productListBlock.style.display = "none";
+      }
+
+      // Скрываем все infoGraphProductLists и удаляем класс active
+      infoGraphProductLists.forEach(infoGraphProductList => {
+        infoGraphProductList.classList.remove("active");
+        infoGraphProductList.style.display = "none";
+      });
+
+      // Показываем нужный блок и добавляем класс active
+      const targetBlock = document.getElementById(targetId);
+      if (targetBlock) {
+        targetBlock.style.display = "grid";
+        targetBlock.classList.add("active");
+      }
+    });
+  });
+  const buttons = document.querySelectorAll(".open-project-mobile");
+  const projects = document.querySelectorAll(".info-graph-product-list.projects");
+  const swiper = document.querySelector(".info-graph-swiper.mobile.first");
+  const moreAll = document.querySelector(".info-graph-more.all");
+  const closeProjects = document.querySelector(".info-graph-more.projects");
+
+  // Открытие проекта
+  buttons.forEach((button, index) => {
+    button.addEventListener("click", () => {
+      // Скрыть все проекты
+      projects.forEach(project => project.classList.remove("active"));
+
+      // Показать нужный проект
+      if (projects[index]) {
+        projects[index].classList.add("active");
+      }
+
+      // Скрыть swiper
+      if (swiper) {
+        swiper.style.display = "none";
+      }
+
+      // Скрыть блок "more all"
+      if (moreAll) {
+        moreAll.style.display = "none";
+      }
+
+      // Показать кнопку закрытия
+      if (closeProjects) {
+        closeProjects.classList.add("active");
+      }
+    });
+  });
+
+  // Закрытие проекта
+  if (closeProjects) {
+    closeProjects.addEventListener("click", () => {
+      // Скрыть все активные проекты
+      projects.forEach(project => project.classList.remove("active"));
+
+      // Показать swiper
+      if (swiper) {
+        swiper.style.display = "block";
+      }
+
+      // Показать moreAll снова
+      if (moreAll) {
+        moreAll.style.display = "flex";
+      }
+
+      // Скрыть кнопку закрытия
+      closeProjects.classList.remove("active");
+    });
+  }
   const secondBtn = document.querySelector(".tabs__nav-btn.second");
   const video = document.querySelector(".tab-video");
   const hoverZone = document.querySelector(".play-hover-zone");
@@ -334,6 +430,27 @@ document.addEventListener("DOMContentLoaded", function () {
       closePopup();
     }
   }
+  function openPopup() {
+    popup.classList.add("active");
+
+    // Добавляем состояние в историю при открытии
+    history.pushState({
+      popupOpen: true
+    }, "", window.location.href);
+  }
+  function closePopup() {
+    popup.classList.remove("active");
+
+    // Если мы в состоянии с открытым попапом — идём назад по истории
+    if (history.state && history.state.popupOpen) {
+      history.back();
+    }
+  }
+  window.addEventListener("popstate", function () {
+    if (popup.classList.contains("active")) {
+      popup.classList.remove("active");
+    }
+  });
   window.addEventListener("resize", function () {
     if (!window.matchMedia("(max-width: 1023px)").matches) {
       popup.removeEventListener("touchstart", function () {});
@@ -561,12 +678,16 @@ document.addEventListener("DOMContentLoaded", function () {
     },
     watchOverflow: false
   });
-  const toggleButton = document.querySelector(".info-graph-more");
+  const toggleButton = document.querySelector(".info-graph-more.all");
   const swiperBlock = document.querySelector(".info-graph-swiper");
-  const productListBlock = document.querySelector(".info-graph-product-list");
   if (toggleButton && swiperBlock && productListBlock) {
     productListBlock.style.display = "none";
     toggleButton.addEventListener("click", function () {
+      // Скрываем и снимаем active с infoGraphProductLists
+      infoGraphProductLists.forEach(block => {
+        block.style.display = "none";
+        block.classList.remove("active");
+      });
       if (swiperBlock.style.display !== "none") {
         swiperBlock.style.display = "none";
         productListBlock.style.display = "grid"; // Используем grid вместо block
@@ -655,32 +776,35 @@ document.addEventListener("DOMContentLoaded", function () {
     backdropClick: "close",
     trapFocus: false,
     on: {
-      reveal: (fancybox, slide) => {
-        // Добавляем состояние в историю
+      reveal: fancybox => {
+        // Добавляем новую запись в историю при открытии
         history.pushState({
-          fancybox: true,
-          id: slide.id
+          fancybox: true
         }, "");
       },
-      // При закрытии попапа
-      close: (fancybox, slide, trigger) => {
-        var _history$state;
-        // Если закрытие вызвано не свайпом назад (например, кнопкой или кликом вне зоны)
-        if (trigger !== "popstate" && (_history$state = history.state) !== null && _history$state !== void 0 && _history$state.fancybox) {
-          history.back(); // Удаляем наше искусственное состояние
+      closing: fancybox => {
+        // При закрытии возвращаемся назад по истории
+        if (history.state && history.state.fancybox) {
+          history.back();
         }
       }
     }
   });
 
   // Закрываем Fancybox при нажатии кнопки "назад"
-  window.addEventListener("popstate", event => {
-    var _event$state;
-    if ((_event$state = event.state) !== null && _event$state !== void 0 && _event$state.fancybox) {
-      Fancybox.close(); // Закрываем попап при свайпе назад
+  window.addEventListener("popstate", function (event) {
+    // Закрываем Fancybox, если он открыт
+    if (Fancybox.getInstance()) {
+      Fancybox.close();
     }
   });
 
+  // Для SPA (если используется роутер)
+  window.addEventListener("hashchange", () => {
+    if (Fancybox.getInstance()) {
+      Fancybox.close();
+    }
+  });
   const closeButtons = document.querySelectorAll(".popup-text-close");
   closeButtons.forEach(button => {
     button.addEventListener("click", function (e) {

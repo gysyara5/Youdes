@@ -49,6 +49,8 @@ html {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none; /* запрещает выделение */
+  -webkit-tap-highlight-color: transparent;
+  tap-highlight-color: transparent;
 }
 
 .page {
@@ -1029,25 +1031,25 @@ a {
   display: flex;
 }
 
-.info-graph-more .more-close {
+.info-graph-more.all .more-close {
   display: none;
 }
-.info-graph-more .icon-burger .off {
+.info-graph-more.all .icon-burger .off {
   display: none;
 }
-.info-graph-more.active .icon-burger .off {
+.info-graph-more.all.active .icon-burger .off {
   display: block;
 }
-.info-graph-more.active .icon-burger .on {
+.info-graph-more.all.active .icon-burger .on {
   display: none;
 }
-.info-graph-more.active .more-close {
+.info-graph-more.all.active .more-close {
   display: block;
 }
-.info-graph-more.active .all-project {
+.info-graph-more.all.active .all-project {
   display: none;
 }
-.info-graph-more.active .icon-more {
+.info-graph-more.all.active .icon-more {
   gap: 0;
   -webkit-transform: rotate(90deg);
   -ms-transform: rotate(90deg);
@@ -1055,9 +1057,20 @@ a {
   height: 15px;
 }
 @media (max-width: 576px) {
-  .info-graph-more.active .icon-more {
+  .info-graph-more.all.active .icon-more {
     height: 16px;
   }
+}
+.info-graph-more.projects {
+  display: none;
+}
+.info-graph-more.projects.active {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+.info-graph-more.projects .off {
+  display: block;
 }
 
 .popup-container {
@@ -1524,6 +1537,9 @@ a {
   color: #fff;
   cursor: pointer;
 }
+.checkbox-item label a {
+  text-decoration: underline;
+}
 @media (min-width: 1921px) {
   .checkbox-item label {
     font-size: 16px;
@@ -1532,7 +1548,6 @@ a {
   .checkbox-item label a {
     font-size: 16px;
     line-height: 26px;
-    text-decoration: none;
   }
 }
 @media (max-width: 1440px) {
@@ -1540,15 +1555,11 @@ a {
     font-size: 12px;
     line-height: 183%;
   }
-  .checkbox-item label a {
-    text-decoration: none;
-  }
 }
 @media (max-width: 1440px) and (max-width: 1024px) {
   .checkbox-item label a {
     font-size: 16px;
     line-height: 22px;
-    text-decoration: underline;
   }
 }
 @media (max-width: 1024px) {
@@ -1565,7 +1576,6 @@ a {
   .checkbox-item label a {
     font-size: 12px;
     line-height: 20px;
-    text-decoration: none;
   }
 }
 
@@ -3195,6 +3205,20 @@ a {
   margin-right: 0;
   padding-right: 0;
   width: 100%;
+}
+
+.info-graph-product-list.projects.active {
+  display: -ms-grid !important;
+  display: grid !important;
+}
+
+.open-project-mobile {
+  pointer-events: none;
+}
+@media (max-width: 1024px) {
+  .open-project-mobile {
+    pointer-events: all;
+  }
 }
 
 .header {
