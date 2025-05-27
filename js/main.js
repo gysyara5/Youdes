@@ -656,28 +656,31 @@ document.addEventListener("DOMContentLoaded", function () {
     trapFocus: false,
     on: {
       reveal: (fancybox, slide) => {
-        // Добавляем запись в историю при открытии попапа
+        // Добавляем состояние в историю
         history.pushState({
-          fancybox: true
+          fancybox: true,
+          id: slide.id
         }, "");
       },
-      close: (fancybox, slide) => {
+      // При закрытии попапа
+      close: (fancybox, slide, trigger) => {
         var _history$state;
-        // Если попап закрыт вручную, убираем добавленное состояние
-        if ((_history$state = history.state) !== null && _history$state !== void 0 && _history$state.fancybox) {
-          history.back();
+        // Если закрытие вызвано не свайпом назад (например, кнопкой или кликом вне зоны)
+        if (trigger !== "popstate" && (_history$state = history.state) !== null && _history$state !== void 0 && _history$state.fancybox) {
+          history.back(); // Удаляем наше искусственное состояние
         }
       }
     }
   });
 
   // Закрываем Fancybox при нажатии кнопки "назад"
-  window.addEventListener("popstate", function (event) {
+  window.addEventListener("popstate", event => {
     var _event$state;
     if ((_event$state = event.state) !== null && _event$state !== void 0 && _event$state.fancybox) {
-      Fancybox.close();
+      Fancybox.close(); // Закрываем попап при свайпе назад
     }
   });
+
   const closeButtons = document.querySelectorAll(".popup-text-close");
   closeButtons.forEach(button => {
     button.addEventListener("click", function (e) {
